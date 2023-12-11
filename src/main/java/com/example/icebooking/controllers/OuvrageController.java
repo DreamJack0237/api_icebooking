@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.*;
 import java.net.http.HttpRequest;
 import java.util.List;
 
-@RequestMapping(value = "Ouvrage")
+@RequestMapping(value = "/Ouvrage")
 @RestController
 public class OuvrageController {
     private final OuvrageService ouvrageService;
