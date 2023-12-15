@@ -21,7 +21,7 @@ public class Ouvrage implements Serializable {
     private Integer id;
     @Column(name="nom_ouvrage")
     private String nom_ouvrage;
-    @Column(name="auteurr")
+    @Column(name="autheur")
     private String auteurr;
     @Column(name="descriiption")
     private String descriiption;
