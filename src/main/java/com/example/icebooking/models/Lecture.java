@@ -15,6 +15,7 @@ import java.util.Date;
 @Data
 public class Lecture implements Serializable {
     @Id
+    @GeneratedValue(strategy=GenerationType.IDENTITY)
     private Integer id;
     @Column(name="date_lecture")
     private Date date_lecture;
@@ -24,6 +25,6 @@ public class Lecture implements Serializable {
     private Utilisateur utilisateur;
 
     @ManyToOne
-    @JoinColumn(name = "ouvrqge_id")
+    @JoinColumn(name = "ouvrage_id")
     private Ouvrage ouvrage;
 }

@@ -3,7 +3,9 @@ package com.example.icebooking.models;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 import java.io.Serializable;
 import java.util.Date;
@@ -11,8 +13,8 @@ import java.util.Date;
 @Entity
 @Table(name="Avis")
 @NoArgsConstructor
-@AllArgsConstructor
-@Data
+@Setter
+@Getter
 public class Avis implements Serializable {
     @Id
     private Integer id;

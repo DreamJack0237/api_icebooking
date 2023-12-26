@@ -1,5 +1,16 @@
 spring:
- security:
-  user:
-   name: ngdream
-   password: amizone
+  security:
+    user:
+      name: icekiwi
+      password: icekiwicopy2023
+
+  datasource:
+    url: jdbc:mysql://localhost:3306/bookbd?useSSL=false&serverTimezone=UTC&allowPublicKeyRetrieval=true&createDatabaseIfNotExist=true
+    password: amizoneng
+    username: root
+    driver-class-name: com.mysql.cj.jdbc.Driver
+  jpa:
+    hibernate:
+      ddl-auto: update
+    show-sql: true
+    

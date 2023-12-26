@@ -3,7 +3,9 @@ package com.example.icebooking.models;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
 import lombok.ToString;
 
 import java.util.List;
@@ -11,15 +13,15 @@ import java.util.List;
 @Entity
 @Table
 @NoArgsConstructor
-@AllArgsConstructor
-@Data
+@Setter
+@Getter
 @ToString
 public class Categorie {
     @Id
-
+    @GeneratedValue(strategy=GenerationType.IDENTITY)
     private Integer id;
-    @Column(name="nom_categorie")
-    private String nom_categorie;
+    @Column(name="nom")
+    private String nom;
     @Column(name="couleur")
     private String couleur;
 

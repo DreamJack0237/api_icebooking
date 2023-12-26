@@ -2,48 +2,65 @@ package com.example.icebooking.controllers;
 
 
 import com.example.icebooking.models.Ouvrage;
-import com.example.icebooking.service.OuvrageService;
+import com.example.icebooking.services.OuvrageService;
+import com.example.icebooking.services.OuvrageServiceImpl;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
-import java.net.http.HttpRequest;
+
 import java.util.List;
 
-@RequestMapping(value = "/Ouvrage")
+@RequestMapping("/ouvrages")
 @RestController
 public class OuvrageController {
-    private final OuvrageService ouvrageService;
+    private final OuvrageServiceImpl ouvrageService;
 
 
-    public OuvrageController(OuvrageService ouvrageService) {
+    public OuvrageController(OuvrageServiceImpl ouvrageService) {
         this.ouvrageService = ouvrageService;
     }
     @ResponseStatus(HttpStatus.CREATED )
-    @PostMapping("/createOuvrage")
-    public void Creer(@RequestBody Ouvrage ouvrage){
-        this.ouvrageService.CreateOuvrage(ouvrage);
+    @PostMapping
+    public void creerOuvrage(@RequestBody Ouvrage ouvrage){
+        this.ouvrageService.createOuvrage(ouvrage);
     }
 
     @ResponseStatus(HttpStatus.ACCEPTED )
-    @GetMapping("/listeOuvrage")
+    @GetMapping("")
     public List<Ouvrage> listeOuvrage(){
-        return ouvrageService.GetOuvrages();
+       return ouvrageService.getOuvrages();
+  
     }
     @ResponseStatus(HttpStatus.ACCEPTED )
-    @DeleteMapping ("/deleteOuvrage/{id}")
-    public void Delete(Integer id){
-        this.ouvrageService.DeleteOuvrage(id);
+    @DeleteMapping ("/{id}")
+    public void deleteOuvrage(@PathVariable Integer id){
+        this.ouvrageService.deleteOuvrage(id);
     }
     @ResponseStatus(HttpStatus.ACCEPTED )
-    @PutMapping("/updateOuvrage/{id}")
-    public void Update(Integer id, Ouvrage ouvrage){
-        this.ouvrageService.UpdateOuvrage(id,ouvrage);
+    @PutMapping("/{id}")
+    public void updateOuvrage(@PathVariable Integer id,@RequestBody Ouvrage ouvrage){
+        this.ouvrageService.updateOuvrage(id,ouvrage);
     }
     @ResponseStatus(HttpStatus.ACCEPTED )
-    @GetMapping("/Ouvrage/{id}")
-    public Ouvrage Ouvrage(Integer id){
+    @GetMapping("/{id}")
+    public Ouvrage getOuvrage(@PathVariable Integer id) {
         return ouvrageService.getOuvrage(id);
     }
+    
+    @ResponseStatus(HttpStatus.ACCEPTED )
+    @GetMapping("/{id}/avis")
+    public Ouvrage getAvisOuvrage(@PathVariable Integer id) {
+        return ouvrageService.getOuvrage(id);
+    }
+    
+        
+    @ResponseStatus(HttpStatus.ACCEPTED )
+    @GetMapping("/{id}/comments")
+    public Ouvrage getCommentaireOuvrage( @PathVariable Integer id){
+        return ouvrageService.getOuvrage(id);
+    }
+
+
 
 
 }

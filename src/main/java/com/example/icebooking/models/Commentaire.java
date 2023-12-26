@@ -3,7 +3,9 @@ package com.example.icebooking.models;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
 import lombok.ToString;
 
 import java.io.Serializable;
@@ -11,11 +13,12 @@ import java.io.Serializable;
 @Entity
 @Table(name="commentaire")
 @NoArgsConstructor
-@AllArgsConstructor
 @Data
-@ToString
+@Setter
+@Getter
 public class Commentaire implements Serializable {
     @Id
+    @GeneratedValue(strategy=GenerationType.IDENTITY)
     private Integer id;
     @Column(name="message")
     private String message;

@@ -1,18 +1,17 @@
 package com.example.icebooking.services;
 
+import com.example.icebooking.models.Ouvrage;
+import com.example.icebooking.repositories.OuvrageRepository;
+
+import java.util.ArrayList;
 import java.util.List;
 
-import com.example.icebooking.models.Ouvrage;
-
 public interface OuvrageService {
-    Ouvrage createOuvrage(Ouvrage ouvrage);
+public void createOuvrage(Ouvrage ouvrage);
+public  void deleteOuvrage(Integer id);
+public Ouvrage getOuvrage(Integer id);
+public List<Ouvrage> getOuvrages();
 
-    Ouvrage updateOuvrage(Ouvrage ouvrage,long id);
-
-    List<Ouvrage> getAllOuvrages();
-
-    Ouvrage getOuvrage(long id);
-    
-    String deleteOuvrage(long id);
+public  void updateOuvrage(Integer id,Ouvrage ouvrage);
 
 }

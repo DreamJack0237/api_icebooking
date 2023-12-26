@@ -17,7 +17,7 @@ public class Notification implements Serializable  {
     @Id
     private Integer id;
     @Column(name="Message")
-    private String Message;
+    private String message;
 
     @ManyToOne
     @JoinColumn(name = "utilisateur_id")

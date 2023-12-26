@@ -17,6 +17,7 @@ import java.util.List;
 @ToString
 public class Donateur implements Serializable {
     @Id
+    @GeneratedValue(strategy=GenerationType.IDENTITY)
     private Integer id;
     @Column(name="nom")
     private String nom;

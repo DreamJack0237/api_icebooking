@@ -1,44 +1,52 @@
 package com.example.icebooking.services;
 
 import com.example.icebooking.models.Ouvrage;
+import com.example.icebooking.repositories.OuvrageRepository;
+import lombok.AllArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.stereotype.Service;
+import org.springframework.web.server.ResponseStatusException;
 
+import java.util.ArrayList;
 import java.util.List;
 
-public class OuvrageServiceImpl implements  OuvrageService {
 
 
-    private final  OuvrageRepository  ouvrageRepository;
-        @Override
-    public Ouvrage createOuvrage(Ouvrage ouvrage) {
-        return ouvrageRepository.save(ouvrage);
-    }
+@AllArgsConstructor
+@Service
+public class OuvrageServiceImpl implements OuvrageService {
 
-    @Override
-    public Ouvrage updateOuvrage(Ouvrage ouvrage,long id) {
-        // TODO Auto-generated method stub
-        return  ouvragerepository.findById(id).map(p->
-        {
-           return  ouvrageRepository.save(p);
-        }).orElseThrow();
-    }
-
-    @Override
-    public List<Ouvrage> getAllOuvrages() {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'getAllOuvrages'");
-    }
+    @Autowired
+    private final OuvrageRepository ouvrageRepository;
 
 
     @Override
-    public Ouvrage getOuvrage(long id) {
-        // TODO Auto-generated method stub
-        return ouvrageRepository.findById(id).orElseThrow();
+    public void createOuvrage(Ouvrage ouvrage){
+        this.ouvrageRepository.save(ouvrage);
+    }
+    @Override
+    public void deleteOuvrage(Integer id){
+        this.ouvrageRepository.deleteById(id);
+    }
+    @Override
+    public void updateOuvrage(Integer id,Ouvrage ouvrage){
+        this.ouvrageRepository.save(ouvrage);
+    }
+    @Override
+    public Ouvrage getOuvrage(Integer id){
+        return ouvrageRepository.findById(id).orElseThrow(()->new ResponseStatusException(HttpStatus.NOT_FOUND));
     }
 
     @Override
-    public String deleteOuvrage(long id) {
-        // TODO Auto-generated method stub
-        ouvrageRepository.deleteById(id);
-        return "ok";
+    public List<Ouvrage> getOuvrages(){
+        List<Ouvrage> ouvrages =new ArrayList<>();
+        ouvrageRepository.findAll().forEach(ouvrage ->{
+            ouvrages.add(ouvrage);
+
+        });
+
+        return ouvrages;
     }
+
 }

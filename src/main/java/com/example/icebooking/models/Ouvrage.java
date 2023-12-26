@@ -19,19 +19,19 @@ public class Ouvrage implements Serializable {
     @Id
     @GeneratedValue(strategy=GenerationType.IDENTITY)
     private Integer id;
-    @Column(name="nom_ouvrage")
-    private String nom_ouvrage;
+    @Column(name="nom")
+    private String nom;
     @Column(name="autheur")
-    private String auteurr;
-    @Column(name="descriiption")
-    private String descriiption;
+    private String autheur;
+    @Column(name="description")
+    private String description;
     @Column(name="quantite")
     private Integer quantite;
     @Column(name="version_num")
     private String version_num;
 
     @ManyToOne
-    @JoinColumn(name = "utilisateur_id")
+    @JoinColumn(name = "utilisateur_id",nullable = true)
     private Utilisateur utilisateur;
 
     @OneToMany(mappedBy = "ouvrage",cascade = CascadeType.ALL,fetch=FetchType.LAZY)
@@ -61,16 +61,16 @@ public class Ouvrage implements Serializable {
         return id;
     }
 
-    public String getNom_ouvrage() {
-        return nom_ouvrage;
+    public String getNom() {
+        return nom;
     }
 
-    public String getAuteurr() {
-        return auteurr;
+    public String getAutheur() {
+        return autheur;
     }
 
-    public String getDescriiption() {
-        return descriiption;
+    public String getDescription() {
+        return description;
     }
 
     public Integer getQuantite() {
@@ -109,16 +109,16 @@ public class Ouvrage implements Serializable {
         return categories;
     }
 
-    public void setNom_ouvrage(String nom_ouvrage) {
-        this.nom_ouvrage = nom_ouvrage;
+    public void setNom(String nom) {
+        this.nom = nom;
     }
 
-    public void setAuteurr(String auteurr) {
-        this.auteurr = auteurr;
+    public void setAutheur(String auteurr) {
+        this.autheur = auteurr;
     }
 
-    public void setDescriiption(String descriiption) {
-        this.descriiption = descriiption;
+    public void setDescription(String descriiption) {
+        this.description = descriiption;
     }
 
     public void setQuantite(Integer quantite) {

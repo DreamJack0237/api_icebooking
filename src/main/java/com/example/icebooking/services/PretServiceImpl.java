@@ -3,41 +3,49 @@ package com.example.icebooking.services;
 import java.util.List;
 
 import com.example.icebooking.models.Pret;
+import com.example.icebooking.repositories.PretRepository;
+import lombok.AllArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
+
+@AllArgsConstructor
+@Service
 public class PretServiceImpl implements PretService{
 
+    @Autowired
     private final PretRepository pretRepository;
-        @Override
-    public Pret createProduct(Pret pret) {
-        return productrepository.save(pret);
+    @Override
+    public Pret createPret(Pret pret) {
+        return pretRepository.save(pret);
     }
 
     @Override
-    public pret updateProduct(Pret pret,long id) {
+    public Pret updatePret(Integer id,Pret pret) {
         // TODO Auto-generated method stub
-        return  productrepository.findById(id).map(p->
+        return  pretRepository.findById(id).map(p->
         {
-           return  productrepository.save(p);
+           return  pretRepository.save(p);
         }).orElseThrow();
     }
 
     @Override
-    public List<pret> getAllProducts() {
+    public List<Pret> getPrets() {
         // TODO Auto-generated method stub
         throw new UnsupportedOperationException("Unimplemented method 'getAllProducts'");
     }
 
 
     @Override
-    public pret getProduct(long id) {
+    public Pret getPret(Integer id) {
         // TODO Auto-generated method stub
-        return productrepository.findById(id).orElseThrow();
+        return pretRepository.findById(id).orElseThrow();
     }
 
     @Override
-    public String deleteProduct(long id) {
+    public String deletePret(Integer id) {
         // TODO Auto-generated method stub
-        productrepository.deleteById(id);
+        pretRepository.deleteById(id);
         return "ok";
     }
 }
