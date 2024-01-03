@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
-@RequestMapping("/ouvrages")
+//@RequestMapping("/ouvrages")
 @RestController
 public class OuvrageController {
     private final OuvrageServiceImpl ouvrageService;
@@ -20,7 +20,7 @@ public class OuvrageController {
         this.ouvrageService = ouvrageService;
     }
     @ResponseStatus(HttpStatus.CREATED )
-    @PostMapping
+    @PostMapping("createOuvrage")
     public void creerOuvrage(@RequestBody Ouvrage ouvrage){
         this.ouvrageService.createOuvrage(ouvrage);
     }

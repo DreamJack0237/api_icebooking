@@ -15,6 +15,8 @@ import java.util.Date;
 @NoArgsConstructor
 public class Telechargement implements Serializable {
     @Id
+    @GeneratedValue(strategy=GenerationType.IDENTITY)
+    @Column(nullable = false)
     private Integer id;
     @Column(name="date_telecharger=ment")
     private Date date;

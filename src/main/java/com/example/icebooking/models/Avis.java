@@ -17,6 +17,8 @@ import java.util.Date;
 @Getter
 public class Avis implements Serializable {
     @Id
+    @GeneratedValue(strategy=GenerationType.IDENTITY)
+    @Column(nullable = false)
     private Integer id;
     @Column(name="valeur")
     private String valeur;

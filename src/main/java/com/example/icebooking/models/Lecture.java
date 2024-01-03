@@ -16,6 +16,7 @@ import java.util.Date;
 public class Lecture implements Serializable {
     @Id
     @GeneratedValue(strategy=GenerationType.IDENTITY)
+    @Column(nullable = false)
     private Integer id;
     @Column(name="date_lecture")
     private Date date_lecture;

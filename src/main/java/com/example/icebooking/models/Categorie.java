@@ -19,6 +19,7 @@ import java.util.List;
 public class Categorie {
     @Id
     @GeneratedValue(strategy=GenerationType.IDENTITY)
+    @Column(nullable = false)
     private Integer id;
     @Column(name="nom")
     private String nom;
