@@ -6,7 +6,7 @@ import com.example.icebooking.models.Utilisateur;
 import com.example.icebooking.models.Validation;
 import com.example.icebooking.repositories.UtilisateurRepositorie;
 import lombok.AllArgsConstructor;
-import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
@@ -22,7 +22,7 @@ public class UtilisateurService implements UserDetailsService {
 
     private UtilisateurRepositorie utilisateurRepositorie;
     private ValidationService validationService;
-    private BCryptPasswordEncoder passwordEncoder;
+  final private BCryptPasswordEncoder bCryptPasswordEncoder;
 
     // conditions de validation de l'email
     public void Inscription(Utilisateur utilisateur) {
@@ -31,6 +31,7 @@ public class UtilisateurService implements UserDetailsService {
         }
         if (utilisateur.getEmail().indexOf(".") == -2) {
             throw new RuntimeException("Votre email est invalide");
+
         }
         if (utilisateur.getPassword() == null) {
             throw new IllegalArgumentException("Le mot de passe ne peut pas être null");
@@ -38,7 +39,7 @@ public class UtilisateurService implements UserDetailsService {
 
 
             // cryptage du mot de passe
-            String MpssCrypt = this.passwordEncoder.encode(utilisateur.getPassword());
+            String MpssCrypt = this.bCryptPasswordEncoder.encode(utilisateur.getPassword());
             utilisateur.setPassword(MpssCrypt);
         }
         Optional<Utilisateur> utilisateurOptional= this.utilisateurRepositorie.findByEmail(utilisateur.getEmail());
@@ -57,6 +58,7 @@ public class UtilisateurService implements UserDetailsService {
 
     public void activation(Map<String, String> activation) {
         Validation validation= this.validationService.RecupereEnFonctionDuCode(activation.get("code"));
+
         if(Instant.now().isAfter(validation.getExpiration())){
             throw new RuntimeException("Votre code a expirer");
         }
@@ -66,7 +68,7 @@ public class UtilisateurService implements UserDetailsService {
     }
 
     @Override
-    public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
+    public Utilisateur loadUserByUsername(String username) throws UsernameNotFoundException {
         return this.utilisateurRepositorie
                 .findByEmail(username)
                 .orElseThrow(()->

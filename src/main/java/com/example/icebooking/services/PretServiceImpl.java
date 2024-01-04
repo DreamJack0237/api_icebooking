@@ -3,9 +3,11 @@ package com.example.icebooking.services;
 import java.util.List;
 
 import com.example.icebooking.models.Pret;
+import com.example.icebooking.models.Utilisateur;
 import com.example.icebooking.repositories.PretRepository;
 import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 
 
@@ -17,6 +19,7 @@ public class PretServiceImpl implements PretService{
     private final PretRepository pretRepository;
     @Override
     public Pret createPret(Pret pret) {
+
         return pretRepository.save(pret);
     }
 

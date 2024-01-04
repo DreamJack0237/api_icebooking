@@ -1,10 +1,12 @@
 package com.example.icebooking.services;
 
 import com.example.icebooking.models.Ouvrage;
+import com.example.icebooking.models.Utilisateur;
 import com.example.icebooking.repositories.OuvrageRepository;
 import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 import org.springframework.web.server.ResponseStatusException;
 
@@ -23,6 +25,8 @@ public class OuvrageServiceImpl implements OuvrageService {
 
     @Override
     public void createOuvrage(Ouvrage ouvrage){
+        Utilisateur utilisateur =(Utilisateur) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        ouvrage.setUtilisateur(utilisateur);
         this.ouvrageRepository.save(ouvrage);
     }
     @Override
@@ -31,6 +35,8 @@ public class OuvrageServiceImpl implements OuvrageService {
     }
     @Override
     public void updateOuvrage(Integer id,Ouvrage ouvrage){
+        Utilisateur utilisateur =(Utilisateur) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        ouvrage.setUtilisateur(utilisateur);
         this.ouvrageRepository.save(ouvrage);
     }
     @Override
@@ -43,6 +49,7 @@ public class OuvrageServiceImpl implements OuvrageService {
         List<Ouvrage> ouvrages =new ArrayList<>();
         ouvrageRepository.findAll().forEach(ouvrage ->{
             ouvrages.add(ouvrage);
+
 
         });
 

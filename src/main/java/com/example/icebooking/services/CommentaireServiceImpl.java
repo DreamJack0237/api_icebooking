@@ -3,7 +3,9 @@ package com.example.icebooking.services;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.example.icebooking.models.Utilisateur;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 
 import com.example.icebooking.models.Commentaire;
@@ -21,6 +23,8 @@ public class CommentaireServiceImpl implements CommentaireService {
 
     @Override
     public void createCommentaire(Commentaire commentaire){
+        Utilisateur utilisateur =(Utilisateur) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        commentaire.setUtilisateur(utilisateur);
         this.commentaireRepository.save(commentaire);
     }
     @Override
@@ -29,6 +33,8 @@ public class CommentaireServiceImpl implements CommentaireService {
     }
     @Override
     public void updateCommentaire(Integer id,Commentaire commentaire){
+        Utilisateur utilisateur =(Utilisateur) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        commentaire.setUtilisateur(utilisateur);
         this.commentaireRepository.save(commentaire);
     }
     @Override

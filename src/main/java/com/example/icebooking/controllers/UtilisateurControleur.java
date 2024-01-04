@@ -2,6 +2,7 @@ package com.example.icebooking.controllers;
 
 
 import com.example.icebooking.Dto.AuthenticationDto;
+import com.example.icebooking.config.JwtService;
 import com.example.icebooking.models.Utilisateur;
 import com.example.icebooking.services.UtilisateurService;
 import lombok.AllArgsConstructor;
@@ -22,6 +23,7 @@ import java.util.Map;
 @RequestMapping(consumes = MediaType.APPLICATION_JSON_VALUE)
 public class UtilisateurControleur {
     private AuthenticationManager authenticationManager;
+    private JwtService jwtService;
     private UtilisateurService utilisateurService;
     @PostMapping("inscription")
     public void inscription(@RequestBody Utilisateur utilisateur){
@@ -41,6 +43,9 @@ public class UtilisateurControleur {
                 new UsernamePasswordAuthenticationToken(authenticationDto.username(), authenticationDto.password())
 
         );
+       if(authentication.isAuthenticated()){
+         return   this.jwtService.generate(authenticationDto.username());
+       }
        log.info("Resultat {}", authentication.isAuthenticated());
         return null;
 

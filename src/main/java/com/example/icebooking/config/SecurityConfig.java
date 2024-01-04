@@ -1,10 +1,6 @@
 package com.example.icebooking.config;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.mail.javamail.JavaMailSender;
-import org.springframework.mail.javamail.JavaMailSenderImpl;
-
-import java.util.Properties;
 
 import org.springframework.http.HttpMethod;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -14,14 +10,24 @@ import org.springframework.security.config.annotation.authentication.configurati
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configurers.AbstractHttpConfigurer;
+import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
+import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 
 @Configuration
 @EnableWebSecurity
 public class SecurityConfig{
+private final BCryptPasswordEncoder bCryptPasswordEncoder;
+  private final JwtFilter jwtFilter;
+  private  final UserDetailsService userDetailsService;
 
+    public SecurityConfig(BCryptPasswordEncoder bCryptPasswordEncoder, JwtFilter jwtFilter, UserDetailsService userDetailsService) {
+        this.bCryptPasswordEncoder = bCryptPasswordEncoder;
+        this.jwtFilter = jwtFilter;
+        this.userDetailsService = userDetailsService;
+    }
 
 
     @Bean
@@ -36,32 +42,14 @@ public class SecurityConfig{
                                       .requestMatchers(HttpMethod.POST,"/inscription").permitAll()
                                         .requestMatchers(HttpMethod.POST,"/activation").permitAll()
                                         .anyRequest().authenticated()
-                ).build();
+                )
+                .sessionManagement(httpSecuritySessionManagementConfigurer ->
+                        httpSecuritySessionManagementConfigurer.sessionCreationPolicy(SessionCreationPolicy.STATELESS)
+                        )
+                .addFilterBefore(jwtFilter,UsernamePasswordAuthenticationFilter.class)
+                .build();
 
     }
-    @Bean
-    public BCryptPasswordEncoder bCryptPasswordEncoder() {
-        return new BCryptPasswordEncoder();
-    }
-
-
-        @Bean
-        public JavaMailSender javaMailSender() {
-            JavaMailSenderImpl mailSender = new JavaMailSenderImpl();
-            // Configurer le serveur de messagerie, le port, le nom d'utilisateur, le mot de passe, etc.
-            mailSender.setHost("smtp.gmail.com");
-            mailSender.setPort(587);
-            mailSender.setUsername("ngouoleonel3@gmail.com");
-            mailSender.setPassword("wlax zthp fymp nfoi");
-
-            Properties props = mailSender.getJavaMailProperties();
-            props.put("mail.transport.protocol", "smtp");
-            props.put("mail.smtp.auth", "true");
-            props.put("mail.smtp.starttls.enable", "true");
-            props.put("mail.debug", "true");
-
-            return mailSender;
-        }
 
 
         // gestion des utilisateur authentifier
@@ -71,10 +59,10 @@ public class SecurityConfig{
     }
 
 @Bean
-    public AuthenticationProvider authenticationProvider(UserDetailsService userDetailsService){
+    public AuthenticationProvider authenticationProvider(){
     DaoAuthenticationProvider daoAuthenticationProvider= new DaoAuthenticationProvider();
     daoAuthenticationProvider.setUserDetailsService(userDetailsService);
-    daoAuthenticationProvider.setPasswordEncoder(this.bCryptPasswordEncoder());
+    daoAuthenticationProvider.setPasswordEncoder(bCryptPasswordEncoder);
     return daoAuthenticationProvider;
 }
 
