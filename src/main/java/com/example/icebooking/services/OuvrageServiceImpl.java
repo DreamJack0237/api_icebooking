@@ -35,9 +35,16 @@ public class OuvrageServiceImpl implements OuvrageService {
     }
     @Override
     public void updateOuvrage(Integer id,Ouvrage ouvrage){
+        Ouvrage existingProduct= ouvrageRepository.findById(id).orElseThrow(()->new RuntimeException("Product not found with id: " + id));
+        existingProduct.setAutheur(ouvrage.getAutheur());
+        existingProduct.setNom(ouvrage.getNom());
+        existingProduct.setDescription(ouvrage.getDescription());
+        existingProduct.setQuantite(ouvrage.getQuantite());
+        existingProduct.setUtilisateur(ouvrage.getUtilisateur());
+
         Utilisateur utilisateur =(Utilisateur) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         ouvrage.setUtilisateur(utilisateur);
-        this.ouvrageRepository.save(ouvrage);
+        this.ouvrageRepository.save(existingProduct);
     }
     @Override
     public Ouvrage getOuvrage(Integer id){

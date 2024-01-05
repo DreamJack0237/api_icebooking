@@ -26,7 +26,6 @@ public class AvisServiceImpl implements AvisService {
         Utilisateur utilisateur =(Utilisateur) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         avis.setUtilisateur(utilisateur);
         this.avisRepository.save(avis);
-
     }
     @Override
     public void deleteAvis(Integer id){
@@ -34,8 +33,6 @@ public class AvisServiceImpl implements AvisService {
     }
     @Override
     public void updateAvis(Integer id,Avis avis){
-        Utilisateur utilisateur =(Utilisateur) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-        avis.setUtilisateur(utilisateur);
         this.avisRepository.save(avis);
     }
     @Override
