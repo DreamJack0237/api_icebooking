@@ -1,27 +1,27 @@
 package com.example.icebooking.models;
-
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.ToString;
 
-import java.io.Serializable;
+import java.time.Instant;
+
 @Entity
-@Table(name="notification")
+@Table(name="validation")
+@Data
 @AllArgsConstructor
 @NoArgsConstructor
-@Data
 @ToString
-public class Notification implements Serializable  {
+public class Validation {
     @Id
     @GeneratedValue(strategy=GenerationType.IDENTITY)
     @Column(nullable = false)
     private Integer id;
-    @Column(name="Message")
-    private String message;
-
-    @ManyToOne
-    @JoinColumn(name = "utilisateur_id")
+    private Instant creation;
+    private Instant activation;
+    private Instant expiration;
+    private String code;
+    @OneToOne(cascade = CascadeType.ALL)
     private Utilisateur utilisateur;
 }

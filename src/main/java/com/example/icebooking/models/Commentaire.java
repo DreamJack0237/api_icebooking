@@ -19,6 +19,7 @@ import java.io.Serializable;
 public class Commentaire implements Serializable {
     @Id
     @GeneratedValue(strategy=GenerationType.IDENTITY)
+    @Column(nullable = false)
     private Integer id;
     @Column(name="message")
     private String message;

@@ -18,6 +18,7 @@ import java.util.List;
 public class Ouvrage implements Serializable {
     @Id
     @GeneratedValue(strategy=GenerationType.IDENTITY)
+    @Column(nullable = false)
     private Integer id;
     @Column(name="nom")
     private String nom;
@@ -28,7 +29,7 @@ public class Ouvrage implements Serializable {
     @Column(name="quantite")
     private Integer quantite;
     @Column(name="version_num")
-    private String version_num;
+    private double version_num;
 
     @ManyToOne
     @JoinColumn(name = "utilisateur_id",nullable = true)
@@ -77,7 +78,7 @@ public class Ouvrage implements Serializable {
         return quantite;
     }
 
-    public String getVersion_num() {
+    public double getVersion_num() {
         return version_num;
     }
 
@@ -125,7 +126,7 @@ public class Ouvrage implements Serializable {
         this.quantite = quantite;
     }
 
-    public void setVersion_num(String version_num) {
+    public void setVersion_num(double version_num) {
         this.version_num = version_num;
     }
 

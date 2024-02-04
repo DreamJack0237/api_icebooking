@@ -3,7 +3,9 @@ package com.example.icebooking.services;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.example.icebooking.models.Utilisateur;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 
 import com.example.icebooking.models.Lecture;
@@ -21,6 +23,8 @@ public class LectureServiceImpl implements LectureService {
 
     @Override
     public void createLecture(Lecture lecture){
+        Utilisateur utilisateur =(Utilisateur) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        lecture.setUtilisateur(utilisateur);
         this.lectureRepository.save(lecture);
     }
     @Override
@@ -29,6 +33,8 @@ public class LectureServiceImpl implements LectureService {
     }
     @Override
     public void updateLecture(Integer id,Lecture lecture){
+        Utilisateur utilisateur =(Utilisateur) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        lecture.setUtilisateur(utilisateur);
         this.lectureRepository.save(lecture);
     }
     @Override

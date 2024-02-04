@@ -15,6 +15,8 @@ import java.util.Date;
 @Data
 public class Pret implements Serializable {
     @Id
+    @GeneratedValue(strategy=GenerationType.IDENTITY)
+    @Column(nullable = false)
     private Integer id;
     @Column(name="date_pret")
     private Date date_pret;

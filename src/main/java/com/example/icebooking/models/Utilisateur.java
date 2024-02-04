@@ -5,8 +5,12 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.ToString;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
+import org.springframework.security.core.userdetails.UserDetails;
 
-import java.io.Serializable;
+import java.util.Collection;
+import java.util.Collections;
 import java.util.List;
 
 @Entity
@@ -15,49 +19,90 @@ import java.util.List;
 @AllArgsConstructor
 @NoArgsConstructor
 @ToString
-public class Utilisateur implements Serializable {
+public class Utilisateur implements UserDetails {
 
     @Id
-    @GeneratedValue(strategy=GenerationType.AUTO)
-
-    private  Integer id;
-    @Column(name="nom")
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(nullable = false)
+    private Integer id;
+    @Column(name = "nom")
     private String nom;
-    @Column(name="Email")
-    private String Email;
-    @Column(name="Password")
-    private String Password;
+    @Column(name = "Email")
+    private String email;
+    @Column(name = "mot de passe")
+    private String password;
 
-    @OneToMany(mappedBy = "utilisateur",cascade = CascadeType.ALL,fetch=FetchType.LAZY)
+    public void setNom(String nom) {
+        this.nom = nom;
+    }
+
+    private boolean actif = false;
+
+    @OneToMany(mappedBy = "utilisateur", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private List<Donateur> donateurs;
 
-    @OneToMany(mappedBy = "utilisateur",cascade = CascadeType.ALL,fetch=FetchType.LAZY)
+    @OneToMany(mappedBy = "utilisateur", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private List<Notification> notifications;
 
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "Role_id")
     private Role role;
 
 
-
-    @OneToMany(mappedBy = "utilisateur",cascade = CascadeType.ALL,fetch=FetchType.LAZY)
+    @OneToMany(mappedBy = "utilisateur", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private List<Avis> avis;
 
-    @OneToMany(mappedBy = "utilisateur",cascade = CascadeType.ALL,fetch=FetchType.LAZY)
+    @OneToMany(mappedBy = "utilisateur", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private List<Lecture> lectures;
 
-    @OneToMany(mappedBy = "utilisateur",cascade = CascadeType.ALL,fetch=FetchType.LAZY)
+    @OneToMany(mappedBy = "utilisateur", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private List<Commentaire> commentaires;
 
-    @OneToMany(mappedBy = "utilisateur",cascade = CascadeType.ALL,fetch=FetchType.LAZY)
+    @OneToMany(mappedBy = "utilisateur", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private List<Telechargement> telechargements;
 
-    @OneToMany(mappedBy = "utilisateur",cascade = CascadeType.ALL,fetch=FetchType.LAZY)
+    @OneToMany(mappedBy = "utilisateur", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private List<Ouvrage> ouvrages;
 
-    @OneToMany(mappedBy = "utilisateur",cascade = CascadeType.ALL,fetch=FetchType.LAZY)
+    @OneToMany(mappedBy = "utilisateur", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private List<DemandeDePret> demandeDePrets;
 
+    @Override
+    public Collection<? extends GrantedAuthority> getAuthorities() {
+        return Collections.singletonList(new SimpleGrantedAuthority("ROLE_" + this.role.getTitre()));
+    }
+
+    @Override
+    public String getUsername() {
+        return this.email;
+    }
+    public String getNom() {
+        return this.nom;
+    }
+
+    @Override
+    public String getPassword(){
+        return this.password;
+    }
+    @Override
+    public boolean isAccountNonExpired() {
+        return this.actif;
+    }
+
+    @Override
+    public boolean isAccountNonLocked() {
+        return this.actif;
+    }
+
+    @Override
+    public boolean isCredentialsNonExpired() {
+        return this.actif;
+    }
+
+    @Override
+    public boolean isEnabled() {
+        return this.actif;
+    }
 
 
 }
