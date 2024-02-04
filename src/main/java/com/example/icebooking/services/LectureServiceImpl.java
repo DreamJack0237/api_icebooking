@@ -23,19 +23,8 @@ public class LectureServiceImpl implements LectureService {
     public void createLecture(Lecture lecture){
         this.lectureRepository.save(lecture);
     }
-    @Override
-    public void deleteLecture(Integer id){
-        this.lectureRepository.deleteById(id);
-    }
-    @Override
-    public void updateLecture(Integer id,Lecture lecture){
-        this.lectureRepository.save(lecture);
-    }
-    @Override
-    public Lecture getLecture(Integer id){
-        return lectureRepository.findById(id).orElse(null);
-    }
 
+  
     @Override
     public List<Lecture> getLectures(){
         List<Lecture> lectures =new ArrayList<>();

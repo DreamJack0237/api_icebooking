@@ -25,12 +25,7 @@ public class OuvrageController {
         this.ouvrageService.createOuvrage(ouvrage);
     }
 
-    @ResponseStatus(HttpStatus.ACCEPTED )
-    @GetMapping("")
-    public List<Ouvrage> listeOuvrage(){
-       return ouvrageService.getOuvrages();
   
-    }
     @ResponseStatus(HttpStatus.ACCEPTED )
     @DeleteMapping ("/{id}")
     public void deleteOuvrage(@PathVariable Integer id){
@@ -40,26 +35,6 @@ public class OuvrageController {
     @PutMapping("/{id}")
     public void updateOuvrage(@PathVariable Integer id,@RequestBody Ouvrage ouvrage){
         this.ouvrageService.updateOuvrage(id,ouvrage);
-    }
-
-    
-    @ResponseStatus(HttpStatus.ACCEPTED )
-    @GetMapping("/{id}")
-    public Ouvrage getOuvrage(@PathVariable Integer id) {
-        return ouvrageService.getOuvrage(id);
-    }
-    
-    @ResponseStatus(HttpStatus.ACCEPTED )
-    @GetMapping("/{id}/avis")
-    public Ouvrage getAvisOuvrage(@PathVariable Integer id) {
-        return ouvrageService.getOuvrage(id);
-    }
-    
-        
-    @ResponseStatus(HttpStatus.ACCEPTED )
-    @GetMapping("/{id}/comments")
-    public Ouvrage getCommentaireOuvrage( @PathVariable Integer id){
-        return ouvrageService.getOuvrage(id);
     }
 
 }

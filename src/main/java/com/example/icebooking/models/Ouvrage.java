@@ -102,11 +102,11 @@ public class Ouvrage implements Serializable {
     }
 
     public List<LigneDePret> getLigneDePrets() {
-        return ligneDePrets;
+        return this.ligneDePrets;
     }
 
     public List<Categorie> getCategories() {
-        return categories;
+        return this.categories;
     }
 
     public void setNom(String nom) {
@@ -114,11 +114,11 @@ public class Ouvrage implements Serializable {
     }
 
     public void setAutheur(String auteurr) {
-        this.autheur = auteurr;
+        this.autheur = autheur;
     }
 
     public void setDescription(String descriiption) {
-        this.description = descriiption;
+        this.description = description;
     }
 
     public void setQuantite(Integer quantite) {

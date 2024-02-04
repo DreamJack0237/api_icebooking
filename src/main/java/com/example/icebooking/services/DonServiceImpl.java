@@ -24,10 +24,6 @@ public class DonServiceImpl implements DonService {
         this.donRepository.save(don);
     }
     @Override
-    public void deleteDon(Integer id){
-        this.donRepository.deleteById(id);
-    }
-    @Override
     public void updateDon(Integer id,Don don){
         this.donRepository.save(don);
     }

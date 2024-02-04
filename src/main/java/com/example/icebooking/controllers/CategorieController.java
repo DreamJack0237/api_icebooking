@@ -43,14 +43,16 @@ public class CategorieController {
     public void deleteCategorie(@PathVariable Integer id){
         this.categorieService.deleteCategorie(id);
     }
+    
     @ResponseStatus(HttpStatus.ACCEPTED )
     @PutMapping("/{id}")
     public void updateCategorie(@PathVariable Integer id,@RequestBody Categorie categorie){
         this.categorieService.updateCategorie(id,categorie);
     }
+
+
     @ResponseStatus(HttpStatus.ACCEPTED )
     @GetMapping("/{id}")
-    /////
     public Categorie getCategorie(@PathVariable Integer id) {
         return categorieService.getCategorie(id);
     }
@@ -58,7 +60,6 @@ public class CategorieController {
 
     @ResponseStatus(HttpStatus.ACCEPTED )
     @GetMapping("/{id}/ouvrages")
-    //cet api a pour but de recuperer  les ouvrages appartenant a une categorie
     public Categorie getCategorieOuvrages(@PathVariable Integer id){
         return categorieService.getCategorie(id);
     }

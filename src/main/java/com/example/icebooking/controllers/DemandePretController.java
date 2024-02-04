@@ -16,12 +16,17 @@ import lombok.AllArgsConstructor;
 public class DemandePretController {
     private final DemandePretServiceImpl demandepretService;
 
-
     @ResponseStatus(HttpStatus.CREATED )
-    @PostMapping("/")
-    public void creerDemandePret(@RequestBody DemandeDePret demandePret){
+    @PostMapping("{id}/validate")
+    public void validatePret(@RequestBody DemandeDePret demandePret){
         this.demandepretService.createDemandePret(demandePret);
     }
+    @ResponseStatus(HttpStatus.CREATED )
+    @PostMapping("{id}/reject")
+    public void rejectPret(@RequestBody DemandeDePret demandePret){
+        this.demandepretService.createDemandePret(demandePret);
+    }
+
 
     @ResponseStatus(HttpStatus.ACCEPTED )
     @GetMapping("/")
@@ -39,8 +44,15 @@ public class DemandePretController {
     public void updateDemandePret(@PathVariable Integer id, @RequestBody DemandeDePret demandePret){
         this.demandepretService.updateDemandePret(id,demandePret);
     }
+
     @ResponseStatus(HttpStatus.ACCEPTED )
     @GetMapping("/{id}")
+    public DemandeDePret getDemandePret(@PathVariable Integer id){
+        return demandepretService.getDemandePret(id);
+    }
+
+    @ResponseStatus(HttpStatus.ACCEPTED )
+    @GetMapping("/{id}/lignePret")
     public DemandeDePret getDemandePret(@PathVariable Integer id){
         return demandepretService.getDemandePret(id);
     }

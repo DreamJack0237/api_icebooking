@@ -42,11 +42,7 @@ public class NotificationController {
     public void deleteNotification(@PathVariable Integer id){
         this.notificationService.deleteNotification(id);
     }
-    @ResponseStatus(HttpStatus.ACCEPTED )
-    @PutMapping("/{id}")
-    public void updateNotification(@PathVariable Integer id, @RequestBody Notification notification){
-        this.notificationService.updateNotification(id,notification);
-    }
+
     @ResponseStatus(HttpStatus.ACCEPTED )
     @GetMapping("/{id}")
     public Notification getNotification(@PathVariable Integer id){

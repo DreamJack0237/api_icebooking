@@ -8,7 +8,6 @@ import java.util.List;
 
 public interface LectureService {
      public void createLecture(Lecture lecture);
-    public  void deleteLecture(Integer id);
     public Lecture getLecture(Integer id);
     public List<Lecture> getLectures();
 
