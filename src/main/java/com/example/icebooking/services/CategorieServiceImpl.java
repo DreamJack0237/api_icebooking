@@ -3,7 +3,9 @@ package com.example.icebooking.services;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.example.icebooking.models.Utilisateur;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 
 import com.example.icebooking.models.Categorie;
@@ -21,6 +23,7 @@ public class CategorieServiceImpl implements CategorieService {
 
     @Override
     public void createCategorie(Categorie categorie){
+
         this.categorieRepository.save(categorie);
     }
     @Override
@@ -29,6 +32,7 @@ public class CategorieServiceImpl implements CategorieService {
     }
     @Override
     public void updateCategorie(Integer id,Categorie categorie){
+
         this.categorieRepository.save(categorie);
     }
     @Override

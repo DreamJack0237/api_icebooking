@@ -3,7 +3,9 @@ package com.example.icebooking.services;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.example.icebooking.models.Utilisateur;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 
 import com.example.icebooking.models.Avis;
@@ -21,6 +23,8 @@ public class AvisServiceImpl implements AvisService {
 
     @Override
     public void createAvis(Avis avis){
+        Utilisateur utilisateur =(Utilisateur) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        avis.setUtilisateur(utilisateur);
         this.avisRepository.save(avis);
     }
     @Override

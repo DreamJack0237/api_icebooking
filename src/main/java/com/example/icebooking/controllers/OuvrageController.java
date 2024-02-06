@@ -2,15 +2,17 @@ package com.example.icebooking.controllers;
 
 
 import com.example.icebooking.models.Ouvrage;
+import com.example.icebooking.models.Utilisateur;
 import com.example.icebooking.services.OuvrageService;
 import com.example.icebooking.services.OuvrageServiceImpl;
 import org.springframework.http.HttpStatus;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.*;
 
 
 import java.util.List;
 
-@RequestMapping("/ouvrages")
+//@RequestMapping("/ouvrages")
 @RestController
 public class OuvrageController {
     private final OuvrageServiceImpl ouvrageService;
@@ -20,8 +22,9 @@ public class OuvrageController {
         this.ouvrageService = ouvrageService;
     }
     @ResponseStatus(HttpStatus.CREATED )
-    @PostMapping
+    @PostMapping("createOuvrage")
     public void creerOuvrage(@RequestBody Ouvrage ouvrage){
+
         this.ouvrageService.createOuvrage(ouvrage);
     }
 

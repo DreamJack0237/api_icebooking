@@ -3,7 +3,9 @@ package com.example.icebooking.services;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.example.icebooking.models.Utilisateur;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 
 import com.example.icebooking.models.Donateur;
@@ -17,6 +19,8 @@ public class DonateurServiceImpl implements DonateurService {
     private final DonateurRepository donateurRepository;
     @Override
     public void createDonateur(Donateur donateur){
+        Utilisateur utilisateur =(Utilisateur) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        donateur.setUtilisateur(utilisateur);
         this.donateurRepository.save(donateur);
     }
     @Override
@@ -25,6 +29,8 @@ public class DonateurServiceImpl implements DonateurService {
     }
     @Override
     public void updateDonateur(Integer id,Donateur donateur){
+        Utilisateur utilisateur =(Utilisateur) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        donateur.setUtilisateur(utilisateur);
         this.donateurRepository.save(donateur);
     }
     @Override

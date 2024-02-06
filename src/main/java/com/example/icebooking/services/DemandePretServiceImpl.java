@@ -3,7 +3,9 @@ package com.example.icebooking.services;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.example.icebooking.models.Utilisateur;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 
 import com.example.icebooking.models.DemandeDePret;
@@ -21,6 +23,8 @@ public class DemandePretServiceImpl implements DemandePretService {
 
     @Override
     public void createDemandePret(DemandeDePret demandepret){
+        Utilisateur utilisateur =(Utilisateur) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        demandepret.setUtilisateur(utilisateur);
         this.demandepretRepository.save(demandepret);
     }
     @Override
@@ -29,6 +33,8 @@ public class DemandePretServiceImpl implements DemandePretService {
     }
     @Override
     public void updateDemandePret(Integer id,DemandeDePret demandepret){
+        Utilisateur utilisateur =(Utilisateur) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        demandepret.setUtilisateur(utilisateur);
         this.demandepretRepository.save(demandepret);
     }
     @Override

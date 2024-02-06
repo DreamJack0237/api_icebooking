@@ -27,7 +27,7 @@ public class CategorieController {
     private final CategorieServiceImpl categorieService;
 
     @ResponseStatus(HttpStatus.CREATED )
-    @PostMapping("")
+    @PostMapping("/")
     public void creerCategorie(@RequestBody Categorie categorie){
         this.categorieService.createCategorie(categorie);
     }
