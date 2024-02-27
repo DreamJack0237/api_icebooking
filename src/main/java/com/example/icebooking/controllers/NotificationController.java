@@ -2,6 +2,7 @@ package com.example.icebooking.controllers;
 
 import java.util.List;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -16,27 +17,24 @@ import org.springframework.web.bind.annotation.RestController;
 import com.example.icebooking.models.Notification;
 import com.example.icebooking.services.NotificationServiceImpl;
 
+import lombok.AllArgsConstructor;
+
 @RestController
 @RequestMapping("/notifications")
+@AllArgsConstructor
 public class NotificationController {
-       private final NotificationServiceImpl notificationService;
+
+    @Autowired
+    private final NotificationServiceImpl notificationService;
 
 
-    public NotificationController(NotificationServiceImpl notificationService) {
-        this.notificationService = notificationService;
-    }
     @ResponseStatus(HttpStatus.CREATED )
     @PostMapping("/")
     public void creerNotification(@RequestBody Notification notification){
         this.notificationService.createNotification(notification);
     }
 
-    @ResponseStatus(HttpStatus.ACCEPTED )
-    @GetMapping("/")
-    public List<Notification> listeNotification(){
-       return notificationService.getNotifications();
-  
-    }
+
     @ResponseStatus(HttpStatus.ACCEPTED )
     @DeleteMapping ("/{id}")
     public void deleteNotification(@PathVariable Integer id){

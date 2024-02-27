@@ -22,25 +22,15 @@ public class LectureServiceImpl implements LectureService {
 
 
     @Override
-    public void createLecture(Lecture lecture){
-        Utilisateur utilisateur =(Utilisateur) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-        lecture.setUtilisateur(utilisateur);
-        this.lectureRepository.save(lecture);
-    }
-
-    @Override
-    public void deleteLecture(Integer id){
-        this.lectureRepository.deleteById(id);
-    }
-    @Override
-    public void updateLecture(Integer id,Lecture lecture){
-        Utilisateur utilisateur =(Utilisateur) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-        lecture.setUtilisateur(utilisateur);
-        this.lectureRepository.save(lecture);
-    }
-    @Override
     public Lecture getLecture(Integer id){
         return lectureRepository.findById(id).orElse(null);
+    }
+
+
+    @Override
+    public List<Lecture> getLectures() {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'getLectures'");
     }
 
 }

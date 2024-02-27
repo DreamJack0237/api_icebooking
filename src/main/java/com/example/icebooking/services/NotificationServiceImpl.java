@@ -32,12 +32,6 @@ public class NotificationServiceImpl implements NotificationService {
         this.notificationRepository.deleteById(id);
     }
     @Override
-    public void updateNotification(Integer id,Notification notification){
-        Utilisateur utilisateur =(Utilisateur) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-        notification.setUtilisateur(utilisateur);
-        this.notificationRepository.save(notification);
-    }
-    @Override
     public Notification getNotification(Integer id){
 
         return notificationRepository.findById(id).orElse(null);

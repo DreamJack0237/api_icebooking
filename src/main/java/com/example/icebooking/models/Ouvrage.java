@@ -1,61 +1,63 @@
 package com.example.icebooking.models;
 
-import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
-import lombok.ToString;
-
 import java.io.Serializable;
 import java.util.List;
 
+import jakarta.persistence.CascadeType;
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.JoinTable;
+import jakarta.persistence.ManyToMany;
+import jakarta.persistence.ManyToOne;
+import jakarta.persistence.OneToMany;
+import jakarta.persistence.Table;
+import lombok.Data;
+
 @Entity
-@Table(name="ouvrage")
-@AllArgsConstructor
-@NoArgsConstructor
-@ToString
+@Table(name = "ouvrage")
 @Data
 public class Ouvrage implements Serializable {
     @Id
-    @GeneratedValue(strategy=GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(nullable = false)
     private Integer id;
-    @Column(name="nom")
+    @Column(name = "nom")
     private String nom;
-    @Column(name="autheur")
+    @Column(name = "autheur")
     private String autheur;
-    @Column(name="description")
+    @Column(name = "description")
     private String description;
-    @Column(name="quantite")
+    @Column(name = "quantite")
     private Integer quantite;
-    @Column(name="version_num")
+    @Column(name = "version_num")
     private double version_num;
 
     @ManyToOne
-    @JoinColumn(name = "utilisateur_id",nullable = true)
+    @JoinColumn(name = "utilisateur_id", nullable = true)
     private Utilisateur utilisateur;
 
-    @OneToMany(mappedBy = "ouvrage",cascade = CascadeType.ALL,fetch=FetchType.LAZY)
+    @OneToMany(mappedBy = "ouvrage", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private List<Avis> avis;
 
-    @OneToMany(mappedBy = "ouvrage",cascade = CascadeType.ALL,fetch=FetchType.LAZY)
+    @OneToMany(mappedBy = "ouvrage", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private List<Lecture> lectures;
 
-    @OneToMany(mappedBy = "ouvrage",cascade = CascadeType.ALL,fetch=FetchType.LAZY)
+    @OneToMany(mappedBy = "ouvrage", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private List<Telechargement> telechargements;
 
-    @OneToMany(mappedBy = "ouvrage",cascade = CascadeType.ALL,fetch=FetchType.LAZY)
+    @OneToMany(mappedBy = "ouvrage", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private List<Commentaire> commentaires;
 
-    @OneToMany(mappedBy = "ouvrage",cascade = CascadeType.ALL,fetch=FetchType.LAZY)
+    @OneToMany(mappedBy = "ouvrage", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private List<LigneDePret> ligneDePrets;
 
-
     @ManyToMany
-    @JoinTable(
-            name = "ouvrage_categorie",
-            joinColumns = @JoinColumn(name = "ouvrage_id"),
-            inverseJoinColumns = @JoinColumn(name = "categorie_id"))
+    @JoinTable(name = "ouvrage_categorie", joinColumns = @JoinColumn(name = "ouvrage_id"), inverseJoinColumns = @JoinColumn(name = "categorie_id"))
     private List<Categorie> categories;
 
     public Integer getId() {

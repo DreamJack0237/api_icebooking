@@ -12,10 +12,7 @@ import java.io.Serializable;
 
 @Entity
 @Table(name="commentaire")
-@NoArgsConstructor
 @Data
-@Setter
-@Getter
 public class Commentaire implements Serializable {
     @Id
     @GeneratedValue(strategy=GenerationType.IDENTITY)

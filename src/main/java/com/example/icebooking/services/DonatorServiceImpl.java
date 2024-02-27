@@ -15,19 +15,10 @@ import lombok.AllArgsConstructor;
 
 @AllArgsConstructor
 @Service
-public class DonateurServiceImpl implements DonateurService {
+public class DonatorServiceImpl implements DonatorService {
     private final DonateurRepository donateurRepository;
-    @Override
-    public void createDonateur(Donateur donateur){
-        Utilisateur utilisateur =(Utilisateur) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-        donateur.setUtilisateur(utilisateur);
-        this.donateurRepository.save(donateur);
-    }
-    @Override
-    public void deleteDonateur(Integer id){
-        this.donateurRepository.deleteById(id);
-    }
-    @Override
+
+    
     public void updateDonateur(Integer id,Donateur donateur){
         Utilisateur utilisateur =(Utilisateur) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         donateur.setUtilisateur(utilisateur);

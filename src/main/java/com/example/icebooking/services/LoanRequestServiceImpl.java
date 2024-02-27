@@ -4,7 +4,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.example.icebooking.models.Utilisateur;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 
@@ -16,19 +15,28 @@ import lombok.AllArgsConstructor;
 
 @AllArgsConstructor
 @Service
-public class DemandePretServiceImpl implements DemandePretService {
+public class LoanRequestServiceImpl implements LoanRequestService {
+
 
     private final DemandePretRepository demandepretRepository;
 
 
     @Override
-    public void createDemandePret(DemandeDePret demandepret){
-        Utilisateur utilisateur =(Utilisateur) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-        demandepret.setUtilisateur(utilisateur);
-        this.demandepretRepository.save(demandepret);
+    public void cancelDemandePret(Integer id){
+    
     }
     @Override
-    public void deleteDemandePret(Integer id){
+    public void rejectDemandePret(Integer id){
+        this.demandepretRepository.deleteById(id);
+    }
+
+    @Override
+    public void acceptDemandePret(Integer id){
+        this.demandepretRepository.deleteById(id);
+    }
+
+    @Override
+    public void sendDemandePret(Integer id){
         this.demandepretRepository.deleteById(id);
     }
     @Override

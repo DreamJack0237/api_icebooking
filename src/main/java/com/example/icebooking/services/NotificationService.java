@@ -13,5 +13,4 @@ public interface NotificationService {
     public Notification getNotification(Integer id);
     public List<Notification> getNotifications();
 
-    public  void updateNotification(Integer id,Notification notification);
 }

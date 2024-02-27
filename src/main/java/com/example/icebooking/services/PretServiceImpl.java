@@ -10,34 +10,18 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 
-
 @AllArgsConstructor
 @Service
-public class PretServiceImpl implements PretService{
+public class PretServiceImpl implements PretService {
 
     @Autowired
     private final PretRepository pretRepository;
-    @Override
-    public Pret createPret(Pret pret) {
-
-        return pretRepository.save(pret);
-    }
-
-    @Override
-    public Pret updatePret(Integer id,Pret pret) {
-        // TODO Auto-generated method stub
-        return  pretRepository.findById(id).map(p->
-        {
-           return  pretRepository.save(p);
-        }).orElseThrow();
-    }
 
     @Override
     public List<Pret> getPrets() {
         // TODO Auto-generated method stub
         throw new UnsupportedOperationException("Unimplemented method 'getAllProducts'");
     }
-
 
     @Override
     public Pret getPret(Integer id) {
@@ -46,9 +30,9 @@ public class PretServiceImpl implements PretService{
     }
 
     @Override
-    public String deletePret(Integer id) {
+    public String backPret(Integer id) {
         // TODO Auto-generated method stub
-        pretRepository.deleteById(id);
-        return "ok";
+        return "k";
     }
+
 }

@@ -1,40 +1,35 @@
-package com.example.icebooking.controllers;
+// package com.example.icebooking.controllers;
 
+// import org.springframework.beans.factory.annotation.Autowired;
+// import org.springframework.http.HttpStatus;
+// import org.springframework.web.bind.annotation.DeleteMapping;
+// import org.springframework.web.bind.annotation.PathVariable;
+// import org.springframework.web.bind.annotation.PutMapping;
+// import org.springframework.web.bind.annotation.RequestBody;
+// import org.springframework.web.bind.annotation.RequestMapping;
+// import org.springframework.web.bind.annotation.ResponseStatus;
+// import org.springframework.web.bind.annotation.RestController;
 
-import com.example.icebooking.models.Ouvrage;
-import com.example.icebooking.services.OuvrageService;
-import com.example.icebooking.services.OuvrageServiceImpl;
-import org.springframework.http.HttpStatus;
-import org.springframework.web.bind.annotation.*;
+// import com.example.icebooking.models.Ouvrage;
 
+// @RequestMapping("/loanrequestlines")
+// @RestController
+// public class LignePretController {
 
-import java.util.List;
+// @Autowired
+// private final LignePretController LigneDePretService;
 
-@RequestMapping("/ouvrages")
-@RestController
-public class OuvrageController {
-    private final OuvrageServiceImpl ouvrageService;
+// @ResponseStatus(HttpStatus.ACCEPTED)
+// @DeleteMapping("/{id}")
+// public void deleteLoanRequestLine(@PathVariable Integer id) {
+// this.LigneDePretService.deleteLoanRequestLine(id);
+// }
 
+// @ResponseStatus(HttpStatus.ACCEPTED)
+// @PutMapping("/{id}")
+// public void updateLoanRequestLine(@PathVariable Integer id, @RequestBody
+// Ouvrage ouvrage) {
+// this.LigneDePretService.updateLoanRequestLine(id, ouvrage);
+// }
 
-    public OuvrageController(OuvrageServiceImpl ouvrageService) {
-        this.ouvrageService = ouvrageService;
-    }
-    @ResponseStatus(HttpStatus.CREATED )
-    @PostMapping
-    public void creerOuvrage(@RequestBody Ouvrage ouvrage){
-        this.ouvrageService.createOuvrage(ouvrage);
-    }
-
-  
-    @ResponseStatus(HttpStatus.ACCEPTED )
-    @DeleteMapping ("/{id}")
-    public void deleteOuvrage(@PathVariable Integer id){
-        this.ouvrageService.deleteOuvrage(id);
-    }
-    @ResponseStatus(HttpStatus.ACCEPTED )
-    @PutMapping("/{id}")
-    public void updateOuvrage(@PathVariable Integer id,@RequestBody Ouvrage ouvrage){
-        this.ouvrageService.updateOuvrage(id,ouvrage);
-    }
-
-}
+// }

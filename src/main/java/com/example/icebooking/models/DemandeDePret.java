@@ -13,11 +13,7 @@ import java.util.List;
 
 @Entity
 @Table(name="demandeDePret")
-@AllArgsConstructor
-@NoArgsConstructor
 @Data
-@Setter
-@Getter
 public class DemandeDePret implements Serializable {
     @Id
     @GeneratedValue(strategy=GenerationType.IDENTITY)

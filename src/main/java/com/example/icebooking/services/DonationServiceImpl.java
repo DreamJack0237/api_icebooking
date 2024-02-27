@@ -3,9 +3,7 @@ package com.example.icebooking.services;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.example.icebooking.models.Utilisateur;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 
 import com.example.icebooking.models.Don;
@@ -16,7 +14,7 @@ import lombok.AllArgsConstructor;
 
 @AllArgsConstructor
 @Service
-public class DonServiceImpl implements DonService {
+public class DonationServiceImpl implements DonationService {
            @Autowired
     private final DonRepository donRepository;
 
@@ -44,6 +42,11 @@ public class DonServiceImpl implements DonService {
         });
 
         return dons;
+    }
+    @Override
+    public List<Don> getDonatorDonations(Integer id) {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'getDonatorDonations'");
     }
 
 }

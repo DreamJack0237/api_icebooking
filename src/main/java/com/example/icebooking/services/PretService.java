@@ -7,13 +7,9 @@ import com.example.icebooking.models.Pret;
 
 public interface PretService {
 
-    Pret createPret(Pret pret);
-
-    Pret updatePret(Integer id,Pret pret);
-
     List<Pret> getPrets();
 
     Pret getPret(Integer id);
-    
-    String deletePret(Integer id);
-} 
+
+    String backPret(Integer id);
+}

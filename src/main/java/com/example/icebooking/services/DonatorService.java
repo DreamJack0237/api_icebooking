@@ -4,12 +4,14 @@ import com.example.icebooking.models.Donateur;
 
 import java.util.List;
 
-public interface DonateurService {
+public interface DonatorService {
 
-    public void createDonateur(Donateur ouvrage);
-    public  void deleteDonateur(Integer id);
+    //get a donator information
     public Donateur getDonateur(Integer id);
+
+    //get all donators
     public List<Donateur> getDonateurs();
 
+    //update Donator
     public  void updateDonateur(Integer id,Donateur ouvrage);
 }

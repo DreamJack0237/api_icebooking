@@ -12,15 +12,10 @@ import java.util.Date;
 
 @Entity
 @Table(name="don")
-@AllArgsConstructor
-@NoArgsConstructor
 @Data
-@Setter
-@Getter
 public class Don implements Serializable {
     @Id
     @GeneratedValue(strategy=GenerationType.IDENTITY)
-    @Column(nullable = false)
     private Integer id;
     @Column(name="date")
     private Date date  ;

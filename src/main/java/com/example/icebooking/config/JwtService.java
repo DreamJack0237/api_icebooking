@@ -1,7 +1,7 @@
 package com.example.icebooking.config;
 
 import com.example.icebooking.models.Utilisateur;
-import com.example.icebooking.services.UtilisateurService;
+import com.example.icebooking.services.UserServiceimpl;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
@@ -18,25 +18,24 @@ import java.util.function.Function;
 @AllArgsConstructor
 @Service
 public class JwtService {
-    private final String ENCRYPTION_KEY="f239aa2de8851ab62ecb1c731773791f66f4b3b9cc5695459ac91fc2effb8bb3";
-    private UtilisateurService utilisateurService;
+    private final String ENCRYPTION_KEY = "f239aa2de8851ab62ecb1c731773791f66f4b3b9cc5695459ac91fc2effb8bb3";
+    private UserServiceimpl utilisateurService;
 
+    public Map<String, String> generate(String username) {
 
-    public Map<String,String> generate(String username){
-
-      Utilisateur utilisateur =  this.utilisateurService.loadUserByUsername(username);
+        Utilisateur utilisateur = this.utilisateurService.loadUserByUsername(username);
 
         return this.generateJwt(utilisateur);
     }
 
     private Map<String, String> generateJwt(Utilisateur utilisateur) {
-        final long curenTime =System.currentTimeMillis();
-        final long expireCurenTime= curenTime + 30 * 60 * 1000;
+        final long curenTime = System.currentTimeMillis();
+        final long expireCurenTime = curenTime + 30 * 60 * 1000;
 
         Map<String, Object> claims = Map.of(
                 "nom", utilisateur.getNom(),
                 Claims.EXPIRATION, new Date(expireCurenTime),
-                Claims.SUBJECT,utilisateur.getEmail()
+                Claims.SUBJECT, utilisateur.getEmail()
 
         );
 
@@ -45,10 +44,9 @@ public class JwtService {
                 .setExpiration(new Date(expireCurenTime))
                 .setSubject(utilisateur.getEmail())
                 .setClaims(claims)
-                .signWith(getkey(), SignatureAlgorithm.HS256)
                 .compact();
-        return Map.of("bearer",bearer );
-        
+        return Map.of("bearer", bearer);
+
     }
 
     private Key getkey() {
@@ -57,23 +55,23 @@ public class JwtService {
     }
 
     public String ExtractUsername(String token) {
-        return   this.getClaim(token, Claims::getSubject);
+        return this.getClaim(token, Claims::getSubject);
     }
 
     public boolean isTokenExpired(String token) {
-        Date expirationDate =this.getClaim(token, Claims::getExpiration);
+        Date expirationDate = this.getClaim(token, Claims::getExpiration);
         System.out.println(expirationDate);
-//        log.info(expirationDate);
+        // log.info(expirationDate);
         return expirationDate.before(new Date());
     }
 
-//    private Date getExpirationDateFromToken(String token)
-//     {
-//        return this.getClaim(token, Claims::getExpiration);
-//    }
+    // private Date getExpirationDateFromToken(String token)
+    // {
+    // return this.getClaim(token, Claims::getExpiration);
+    // }
 
     private <T> T getClaim(String token, Function<Claims, T> function) {
-        Claims claims= getAllClaim(token);
+        Claims claims = getAllClaim(token);
         return function.apply(claims);
     }
 

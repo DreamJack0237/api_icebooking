@@ -9,16 +9,14 @@ import java.io.Serializable;
 import java.util.Date;
 
 @Entity
-@Table(name="Lecture")
-@NoArgsConstructor
-@AllArgsConstructor
+@Table(name = "Lecture")
 @Data
 public class Lecture implements Serializable {
     @Id
-    @GeneratedValue(strategy=GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(nullable = false)
     private Integer id;
-    @Column(name="date_lecture")
+    @Column(name = "date_lecture")
     private Date date_lecture;
 
     @ManyToOne

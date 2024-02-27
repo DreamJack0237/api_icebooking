@@ -1,24 +1,24 @@
 package com.example.icebooking.services;
 
-import com.example.icebooking.TypeDeRole;
+import com.example.icebooking.enums.TypeDeRole;
 import com.example.icebooking.models.Role;
 import com.example.icebooking.models.Utilisateur;
 import com.example.icebooking.models.Validation;
 import com.example.icebooking.repositories.UtilisateurRepositorie;
 import lombok.AllArgsConstructor;
-import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.time.Instant;
+import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 
 @Service
 @AllArgsConstructor
-public class UtilisateurService implements UserDetailsService {
+public class UserServiceimpl implements UserService{
 
     private UtilisateurRepositorie utilisateurRepositorie;
     private ValidationService validationService;
@@ -73,5 +73,35 @@ public class UtilisateurService implements UserDetailsService {
                 .findByEmail(username)
                 .orElseThrow(()->
                         new UsernameNotFoundException("cet utilisateur n'existe pas dans notre systeme"));
+    }
+
+    @Override
+    public void getUserLectures(Integer userId) {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'getUserLectures'");
+    }
+
+    @Override
+    public void getUserComments(Integer userId) {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'getUserComments'");
+    }
+
+    @Override
+    public void getUserDownloadings(Integer userId) {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'getUserDownloadings'");
+    }
+
+    @Override
+    public List<Utilisateur> getUsers() {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'getUsers'");
+    }
+
+    @Override
+    public List<Utilisateur> getActivatedUsers() {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'getActivatedUsers'");
     }
 }

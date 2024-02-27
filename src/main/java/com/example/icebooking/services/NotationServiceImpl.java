@@ -16,25 +16,19 @@ import lombok.AllArgsConstructor;
 
 @AllArgsConstructor
 @Service
-public class AvisServiceImpl implements AvisService {
+public class NotationServiceImpl implements NotationService {
            @Autowired
     private final AvisRepository avisRepository;
 
 
     @Override
-    public void createAvis(Avis avis){
+    public void createOrUpdateAvis(Avis avis){
         Utilisateur utilisateur =(Utilisateur) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         avis.setUtilisateur(utilisateur);
         this.avisRepository.save(avis);
     }
-    @Override
-    public void deleteAvis(Integer id){
-        this.avisRepository.deleteById(id);
-    }
-    @Override
-    public void updateAvis(Integer id,Avis avis){
-        this.avisRepository.save(avis);
-    }
+
+
     @Override
     public Avis getAvis(Integer id){
         return avisRepository.findById(id).orElse(null);

@@ -10,28 +10,24 @@ import java.io.Serializable;
 import java.util.List;
 
 @Entity
-@Table(name="donateur")
-@AllArgsConstructor
-@NoArgsConstructor
+@Table(name = "donateur")
 @Data
-@ToString
+
 public class Donateur implements Serializable {
     @Id
-    @GeneratedValue(strategy=GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(nullable = false)
     private Integer id;
-    @Column(name="nom")
+    @Column(name = "nom")
     private String nom;
-    @Column(name="numero_tel")
+    @Column(name = "numero_tel")
     private double telephone;
 
-    @OneToMany(mappedBy = "donateur",cascade = CascadeType.ALL,fetch=FetchType.LAZY)
+    @OneToMany(mappedBy = "donateur", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private List<Don> dons;
 
     @ManyToOne
     @JoinColumn(name = "utilisateur_id")
     private Utilisateur utilisateur;
-
-
 
 }

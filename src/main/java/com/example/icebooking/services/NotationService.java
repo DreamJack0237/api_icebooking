@@ -4,12 +4,10 @@ import com.example.icebooking.models.Avis;
 
 import java.util.List;
 
-public interface AvisService {
+public interface NotationService {
 
-    public void createAvis(Avis avis);
-    public  void deleteAvis(Integer id);
+    //cre
+    public void createOrUpdateAvis(Avis avis);
     public Avis getAvis(Integer id);
     public List<Avis> getAviss();
-
-    public  void updateAvis(Integer id,Avis avis);
 }

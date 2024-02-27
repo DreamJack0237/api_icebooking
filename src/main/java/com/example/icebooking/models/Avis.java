@@ -12,9 +12,7 @@ import java.util.Date;
 
 @Entity
 @Table(name="Avis")
-@NoArgsConstructor
-@Setter
-@Getter
+@Data
 public class Avis implements Serializable {
     @Id
     @GeneratedValue(strategy=GenerationType.IDENTITY)
