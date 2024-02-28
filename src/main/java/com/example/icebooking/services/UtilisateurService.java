@@ -25,6 +25,38 @@ public class UtilisateurService implements UserDetailsService {
   final private BCryptPasswordEncoder bCryptPasswordEncoder;
 
     // conditions de validation de l'email
+    public void InscriptionBiblio(Utilisateur utilisateur) {
+        if (utilisateur.getEmail().indexOf("@") == -1) {
+            throw new RuntimeException("Votre email est invalide");
+        }
+        if (utilisateur.getEmail().indexOf(".") == -2) {
+            throw new RuntimeException("Votre email est invalide");
+
+        }
+        if (utilisateur.getPassword() == null) {
+            throw new IllegalArgumentException("Le mot de passe ne peut pas être null");
+        }else {
+
+
+            // cryptage du mot de passe
+            String MpssCrypt = this.bCryptPasswordEncoder.encode(utilisateur.getPassword());
+            utilisateur.setPassword(MpssCrypt);
+        }
+        Optional<Utilisateur> utilisateurOptional= this.utilisateurRepositorie.findByEmail(utilisateur.getEmail());
+        if (utilisateurOptional.isPresent()){
+            throw new RuntimeException("cet email est deja utiliser");
+        }
+
+        // gestion des rôles
+        Role roleUtilisateur = new Role();
+        roleUtilisateur.setTitre(TypeDeRole.Bibliothequaire);
+        utilisateur.setRole(roleUtilisateur);
+
+        utilisateur = this.utilisateurRepositorie.save(utilisateur);
+        this.validationService.enregistreValidation(utilisateur);
+    }
+
+
     public void Inscription(Utilisateur utilisateur) {
         if (utilisateur.getEmail().indexOf("@") == -1) {
             throw new RuntimeException("Votre email est invalide");

@@ -1,0 +1,26 @@
+###
+//creer avis
+POST http://localhost:8080/avis/
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJub20iOiJsZW8iLCJleHAiOjE3MDgxNDE0ODYsInN1YiI6Im5nb3VvbGVvbmVsNEBnbWFpbC5jb20ifQ.ayJY7aRrRLc1HinK5cjnOQcarxCvmmh4FFO0VCHzSrY
+
+{
+  "valeur": "Excellent livre!",
+  "date_avis": "2024-02-17",
+  "date_mise_ajour": "2024-02-17",
+  "utilisateur":{ "id":1 },
+  "ouvrage":{ "id":2 }
+}
+
+
+
+
+
+
+
+
+###
+
+GET http://localhost:8080/avis
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJub20iOiJsZW8iLCJleHAiOjE3MDgxNDE0ODYsInN1YiI6Im5nb3VvbGVvbmVsNEBnbWFpbC5jb20ifQ.ayJY7aRrRLc1HinK5cjnOQcarxCvmmh4FFO0VCHzSrY

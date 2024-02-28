@@ -31,6 +31,11 @@ public class UtilisateurControleur {
         this.utilisateurService.Inscription(utilisateur);
 
     }
+    @PostMapping("inscriptionBiblio")
+    public void inscriptionBiblio(@RequestBody Utilisateur utilisateur){
+        log.info("InscriptionBiblio");
+        this.utilisateurService.InscriptionBiblio(utilisateur);
+    }
     @PostMapping("activation")
     public void activation(@RequestBody Map<String,String> activation){
         log.info("activation");

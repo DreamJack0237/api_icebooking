@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
-//@RequestMapping("/ouvrages")
+//@RequestMapping("")
 @RestController
 public class OuvrageController {
     private final OuvrageServiceImpl ouvrageService;
@@ -22,14 +22,14 @@ public class OuvrageController {
         this.ouvrageService = ouvrageService;
     }
     @ResponseStatus(HttpStatus.CREATED )
-    @PostMapping("createOuvrage")
+    @PostMapping("/ouvrages/createOuvrage")
     public void creerOuvrage(@RequestBody Ouvrage ouvrage){
 
         this.ouvrageService.createOuvrage(ouvrage);
     }
 
     @ResponseStatus(HttpStatus.ACCEPTED )
-    @GetMapping("")
+    @GetMapping("ouvrage")
     public List<Ouvrage> listeOuvrage(){
        return ouvrageService.getOuvrages();
   
@@ -62,8 +62,6 @@ public class OuvrageController {
     public Ouvrage getCommentaireOuvrage( @PathVariable Integer id){
         return ouvrageService.getOuvrage(id);
     }
-
-
 
 
 }

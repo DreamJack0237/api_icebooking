@@ -3,14 +3,11 @@ package com.example.icebooking.models;
 import com.example.icebooking.TypeDeRole;
 import jakarta.persistence.*;
 import jdk.jfr.Enabled;
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
-import lombok.ToString;
+import lombok.*;
 
 import java.io.Serializable;
 import java.util.List;
-
+@Builder
 @Entity
 @Table(name="role")
 @NoArgsConstructor

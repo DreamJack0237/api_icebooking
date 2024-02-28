@@ -32,8 +32,11 @@ public class Ouvrage implements Serializable {
     private double version_num;
 
     @ManyToOne
-    @JoinColumn(name = "utilisateur_id",nullable = true)
+    @JoinColumn(name = "utilisateur_id",nullable = false)
     private Utilisateur utilisateur;
+    @ManyToOne
+    @JoinColumn(name = "categorie_id",nullable = false)
+    private Categorie categorie;
 
     @OneToMany(mappedBy = "ouvrage",cascade = CascadeType.ALL,fetch=FetchType.LAZY)
     private List<Avis> avis;
@@ -47,8 +50,8 @@ public class Ouvrage implements Serializable {
     @OneToMany(mappedBy = "ouvrage",cascade = CascadeType.ALL,fetch=FetchType.LAZY)
     private List<Commentaire> commentaires;
 
-    @OneToMany(mappedBy = "ouvrage",cascade = CascadeType.ALL,fetch=FetchType.LAZY)
-    private List<LigneDePret> ligneDePrets;
+//    @OneToMany(mappedBy = "ouvrage",cascade = CascadeType.ALL,fetch=FetchType.LAZY)
+//    private List<LigneDePret> ligneDePrets;
 
 
     @ManyToMany
@@ -102,9 +105,9 @@ public class Ouvrage implements Serializable {
         return commentaires;
     }
 
-    public List<LigneDePret> getLigneDePrets() {
-        return ligneDePrets;
-    }
+//    public List<LigneDePret> getLigneDePrets() {
+//        return ligneDePrets;
+//    }
 
     public List<Categorie> getCategories() {
         return categories;
@@ -150,9 +153,9 @@ public class Ouvrage implements Serializable {
         this.commentaires = commentaires;
     }
 
-    public void setLigneDePrets(List<LigneDePret> ligneDePrets) {
-        this.ligneDePrets = ligneDePrets;
-    }
+//    public void setLigneDePrets(List<LigneDePret> ligneDePrets) {
+//        this.ligneDePrets = ligneDePrets;
+//    }
 
     public void setCategories(List<Categorie> categories) {
         this.categories = categories;

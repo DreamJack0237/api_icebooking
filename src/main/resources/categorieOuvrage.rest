@@ -1,0 +1,11 @@
+POST http://localhost:8080/categories/
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJleHAiOjE3MDgxMzk0OTMsInN1YiI6Im5nb3VvbGVvbmVsNEBnbWFpbC5jb20iLCJub20iOiJsZW8ifQ.4zuD2QuhDV_BkyWADTPGM00jbczR6Q9szm-DOiKmo-s
+
+
+{
+  "couleur": "vert",
+  "nom": "histoire"
+}
+
+###

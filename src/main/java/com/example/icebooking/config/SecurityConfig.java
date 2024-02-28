@@ -39,8 +39,10 @@ private final BCryptPasswordEncoder bCryptPasswordEncoder;
                         authorize ->
                                 authorize
                                         .requestMatchers(HttpMethod.POST,"/connexion").permitAll()
+                                        .requestMatchers(HttpMethod.POST,"/inscriptionBiblio").permitAll()
                                       .requestMatchers(HttpMethod.POST,"/inscription").permitAll()
                                         .requestMatchers(HttpMethod.POST,"/activation").permitAll()
+                                        .requestMatchers(HttpMethod.GET,"/ouvrage").permitAll()
                                         .anyRequest().authenticated()
                 )
                 .sessionManagement(httpSecuritySessionManagementConfigurer ->

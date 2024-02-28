@@ -53,14 +53,14 @@ public class OuvrageServiceImpl implements OuvrageService {
 
     @Override
     public List<Ouvrage> getOuvrages(){
-        List<Ouvrage> ouvrages =new ArrayList<>();
+        List<Ouvrage> ouvges =new ArrayList<>();
         ouvrageRepository.findAll().forEach(ouvrage ->{
-            ouvrages.add(ouvrage);
+            ouvges.add(ouvrage);
 
 
         });
 
-        return ouvrages;
+        return ouvges;
     }
 
 }

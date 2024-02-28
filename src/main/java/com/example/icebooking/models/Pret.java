@@ -24,7 +24,11 @@ public class Pret implements Serializable {
     private Date date_limite_retour;
 
     @ManyToOne
-    @JoinColumn(name = "demandeDePret")
-    private DemandeDePret demandeDePret;
+    @JoinColumn(name = "utilisateur_id",nullable = false)
+    private Utilisateur utilisateur;
+
+//    @ManyToOne
+//    @JoinColumn(name = "demandeDePret")
+//    private DemandeDePret demandeDePret;
 
 }
