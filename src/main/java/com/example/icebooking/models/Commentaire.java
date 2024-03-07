@@ -22,6 +22,6 @@ public class Commentaire implements Serializable {
     private Utilisateur utilisateur;
 
     @ManyToOne
-    @JoinColumn(name = "ouvrqge_id")
+    @JoinColumn(name = "ouvrage_id")
     private Ouvrage ouvrage;
 }

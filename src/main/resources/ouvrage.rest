@@ -1,0 +1,29 @@
+###
+//Create_ouvrage
+
+POST http://localhost:8080/ouvrages/createOuvrage
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJleHAiOjE3MDkwNDI2NTYsIm5vbSI6ImZyYW5jayIsInN1YiI6Im5nb3VvbGVvbmVsM0BnbWFpbC5jb20ifQ.1g3SCCDpBLwhoUgX8pzDlmw9XMPv3z1rJ38apr87QXc
+
+{
+  "nom": "La vie de l'homme sur la terre ",
+  "autheur": "Mr leo",
+  "description": "l'homme est mechant",
+  "quantite": 10,
+  "version_num": 1.0,
+  "utilisateur": {
+    "id": 4
+  },
+  "categorie":
+    {
+      "id": 1
+    }
+
+}
+
+### NB: je n'ai pas pu tester pour le cas ou un ouvrage peut avoir plusieur categories
+
+
+
+
+###

@@ -1,0 +1,48 @@
+###
+// inscription
+POST http://localhost:8080/inscription
+Content-Type: application/json
+
+{
+  "email": "ngdream1953@gmail.com",
+  "nom": "ngdream",
+  "password": "amizoneng1"
+}
+###
+// inscription admin
+POST http://localhost:8080/inscriptionBiblio
+content-Type: application/json
+
+{
+  "email": "ngouoleonel3@gmail.com",
+  "nom": "franck",
+  "password": "leo123leo123"
+}
+
+
+
+###
+// activation
+POST http://localhost:8080/activation
+Content-Type: application/json
+
+{
+  "email": "ngouoleonel3@gmail.com",
+  "code": "980237"
+
+}
+
+
+
+
+###
+//cnnexion
+POST http://localhost:8080/connexion
+Content-Type: application/json
+
+{
+  "username": "ngouoleonel3@gmail.com",
+  "password": "leo123leo123"
+}
+
+###

@@ -23,8 +23,6 @@ import lombok.NoArgsConstructor;
 @Entity
 @Table(name = "ouvrage")
 @Data
-@AllArgsConstructor
-@NoArgsConstructor
 public class Ouvrage implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -43,8 +41,11 @@ public class Ouvrage implements Serializable {
     private String version_num;
 
     @ManyToOne
-    @JoinColumn(name = "utilisateur_id", nullable = true)
+    @JoinColumn(name = "utilisateur_id", nullable = false)
     private Utilisateur utilisateur;
+    @ManyToOne
+    @JoinColumn(name = "categorie_id", nullable = false)
+    private Categorie categorie;
 
     @OneToMany(mappedBy = "ouvrage", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private List<Avis> avis;

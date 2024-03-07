@@ -21,37 +21,43 @@ import lombok.AllArgsConstructor;
 @EnableWebSecurity
 @AllArgsConstructor
 public class SecurityConfig {
-    private final BCryptPasswordEncoder bCryptPasswordEncoder;
-    private final JwtFilter jwtFilter;
-    private final UserDetailsService userDetailsService;
+        private final BCryptPasswordEncoder bCryptPasswordEncoder;
+        private final JwtFilter jwtFilter;
+        private final UserDetailsService userDetailsService;
 
-    @Bean
-    public SecurityFilterChain securityFilterChain(HttpSecurity httpSecurity)
-            throws Exception {
-        return httpSecurity
-                .csrf(AbstractHttpConfigurer::disable)
-                .authorizeHttpRequests(
-                        authorize -> authorize
-                                .requestMatchers(HttpMethod.POST, "/connexion").permitAll()
-                                .requestMatchers(HttpMethod.POST, "/inscription").permitAll()
-                                .requestMatchers(HttpMethod.POST, "/activation").permitAll()
-                                .requestMatchers(HttpMethod.GET, "/ouvrages/**").permitAll()
-                                .requestMatchers(HttpMethod.GET, "/categories/**").permitAll()
+        @Bean
+        public SecurityFilterChain securityFilterChain(HttpSecurity httpSecurity)
+                        throws Exception {
+                return httpSecurity
+                                .csrf(AbstractHttpConfigurer::disable)
+                                .authorizeHttpRequests(
+                                                authorize -> authorize
+                                                                .requestMatchers(HttpMethod.POST, "/connexion")
+                                                                .permitAll()
+                                                                .requestMatchers(HttpMethod.POST, "/inscription")
+                                                                .permitAll()
+                                                                .requestMatchers(HttpMethod.POST, "/activation")
+                                                                .permitAll()
+                                                                .requestMatchers(HttpMethod.GET, "/ouvrages/**")
+                                                                .permitAll()
+                                                                .requestMatchers(HttpMethod.GET, "/categories/**")
+                                                                .permitAll()
 
-                                .anyRequest().authenticated())
-                .sessionManagement(httpSecuritySessionManagementConfigurer -> httpSecuritySessionManagementConfigurer
-                        .sessionCreationPolicy(SessionCreationPolicy.STATELESS))
-                .addFilterBefore(jwtFilter, UsernamePasswordAuthenticationFilter.class)
+                                                                .anyRequest().authenticated())
+                                .sessionManagement(
+                                                httpSecuritySessionManagementConfigurer -> httpSecuritySessionManagementConfigurer
+                                                                .sessionCreationPolicy(SessionCreationPolicy.STATELESS))
+                                .addFilterBefore(jwtFilter, UsernamePasswordAuthenticationFilter.class)
 
-                .build();
+                                .build();
 
-    }
+        }
 
-    // gestion des utilisateur authentifier
-    @Bean
-    public AuthenticationManager authenticationManager(AuthenticationConfiguration authenticationConfiguration)
-            throws Exception {
-        return authenticationConfiguration.getAuthenticationManager();
-    }
+        // gestion des utilisateur authentifier
+        @Bean
+        public AuthenticationManager authenticationManager(AuthenticationConfiguration authenticationConfiguration)
+                        throws Exception {
+                return authenticationConfiguration.getAuthenticationManager();
+        }
 
 }
