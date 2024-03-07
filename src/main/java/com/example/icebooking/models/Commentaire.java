@@ -1,24 +1,20 @@
 package com.example.icebooking.models;
 
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
+
 import lombok.Data;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
-import lombok.ToString;
 
 import java.io.Serializable;
 
 @Entity
-@Table(name="commentaire")
+@Table(name = "commentaire")
 @Data
 public class Commentaire implements Serializable {
     @Id
-    @GeneratedValue(strategy=GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(nullable = false)
     private Integer id;
-    @Column(name="message")
+    @Column(name = "message")
     private String message;
 
     @ManyToOne

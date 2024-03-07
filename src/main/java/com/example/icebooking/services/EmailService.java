@@ -12,16 +12,15 @@ public class EmailService {
 
     private final JavaMailSender javaMailSender;
 
-    public void EnvoyerMail(Validation validation){
+    public void EnvoyerMail(Validation validation) {
         SimpleMailMessage message = new SimpleMailMessage();
-        message.setFrom("ngouoleonel3@gmain.com");
+        message.setFrom("ngouoleonel3@gmail.com");
         message.setTo(validation.getUtilisateur().getEmail());
         message.setSubject("Code d'activation");
 
         String text = String.format("Bonjour %s, Votre code d'activation est %s. A bientôt!",
                 validation.getUtilisateur().getNom(),
-                validation.getCode()
-        );
+                validation.getCode());
         message.setText(text);
         javaMailSender.send(message);
     }

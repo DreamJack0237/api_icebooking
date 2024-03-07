@@ -2,7 +2,6 @@ package com.example.icebooking.services;
 
 import java.util.List;
 
-import com.example.icebooking.models.Ouvrage;
 import com.example.icebooking.models.Pret;
 
 public interface PretService {
@@ -12,4 +11,6 @@ public interface PretService {
     Pret getPret(Integer id);
 
     String backPret(Integer id);
+
+    Pret createPret(Pret pret);
 }

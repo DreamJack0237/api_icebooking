@@ -3,12 +3,7 @@ package com.example.icebooking.controllers;
 import java.util.List;
 
 import org.springframework.http.HttpStatus;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseStatus;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import com.example.icebooking.models.Pret;
 import com.example.icebooking.services.PretServiceImpl;
@@ -42,7 +37,7 @@ public class PretController {
     }
 
     @ResponseStatus(HttpStatus.ACCEPTED)
-    @GetMapping("/{id}/items")
+    @GetMapping("/{id}/ouvrages")
     public Pret getLignePret(@PathVariable Integer id) {
         return pretService.getPret(id);
     }

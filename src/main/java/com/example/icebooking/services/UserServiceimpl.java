@@ -6,7 +6,6 @@ import com.example.icebooking.models.Utilisateur;
 import com.example.icebooking.models.Validation;
 import com.example.icebooking.repositories.UtilisateurRepositorie;
 import lombok.AllArgsConstructor;
-import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
@@ -18,11 +17,11 @@ import java.util.Optional;
 
 @Service
 @AllArgsConstructor
-public class UserServiceimpl implements UserService{
+public class UserServiceimpl implements UserService {
 
     private UtilisateurRepositorie utilisateurRepositorie;
     private ValidationService validationService;
-  final private BCryptPasswordEncoder bCryptPasswordEncoder;
+    final private BCryptPasswordEncoder bCryptPasswordEncoder;
 
     // conditions de validation de l'email
     public void Inscription(Utilisateur utilisateur) {
@@ -35,15 +34,14 @@ public class UserServiceimpl implements UserService{
         }
         if (utilisateur.getPassword() == null) {
             throw new IllegalArgumentException("Le mot de passe ne peut pas être null");
-        }else {
-
+        } else {
 
             // cryptage du mot de passe
             String MpssCrypt = this.bCryptPasswordEncoder.encode(utilisateur.getPassword());
             utilisateur.setPassword(MpssCrypt);
         }
-        Optional<Utilisateur> utilisateurOptional= this.utilisateurRepositorie.findByEmail(utilisateur.getEmail());
-        if (utilisateurOptional.isPresent()){
+        Optional<Utilisateur> utilisateurOptional = this.utilisateurRepositorie.findByEmail(utilisateur.getEmail());
+        if (utilisateurOptional.isPresent()) {
             throw new RuntimeException("cet email est deja utiliser");
         }
 
@@ -57,12 +55,13 @@ public class UserServiceimpl implements UserService{
     }
 
     public void activation(Map<String, String> activation) {
-        Validation validation= this.validationService.RecupereEnFonctionDuCode(activation.get("code"));
+        Validation validation = this.validationService.RecupereEnFonctionDuCode(activation.get("code"));
 
-        if(Instant.now().isAfter(validation.getExpiration())){
+        if (Instant.now().isAfter(validation.getExpiration())) {
             throw new RuntimeException("Votre code a expirer");
         }
-       Utilisateur utilisateurActiver = this.utilisateurRepositorie.findById(validation.getUtilisateur().getId()).orElseThrow(()->new RuntimeException("utilisateur inconnu"));
+        Utilisateur utilisateurActiver = this.utilisateurRepositorie.findById(validation.getUtilisateur().getId())
+                .orElseThrow(() -> new RuntimeException("utilisateur inconnu"));
         utilisateurActiver.setActif(true);
         this.utilisateurRepositorie.save(utilisateurActiver);
     }
@@ -71,26 +70,25 @@ public class UserServiceimpl implements UserService{
     public Utilisateur loadUserByUsername(String username) throws UsernameNotFoundException {
         return this.utilisateurRepositorie
                 .findByEmail(username)
-                .orElseThrow(()->
-                        new UsernameNotFoundException("cet utilisateur n'existe pas dans notre systeme"));
+                .orElseThrow(() -> new UsernameNotFoundException("cet utilisateur n'existe pas dans notre systeme"));
     }
 
     @Override
     public void getUserLectures(Integer userId) {
         // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'getUserLectures'");
+        throw new UnsupportedOperationException("Unimplemented method'getUserLectures'");
     }
 
     @Override
     public void getUserComments(Integer userId) {
         // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'getUserComments'");
+        throw new UnsupportedOperationException("Unimplemented method'getUserComments'");
     }
 
     @Override
     public void getUserDownloadings(Integer userId) {
         // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'getUserDownloadings'");
+        throw new UnsupportedOperationException("Unimplemented method'getUserDownloadings'");
     }
 
     @Override
@@ -104,4 +102,35 @@ public class UserServiceimpl implements UserService{
         // TODO Auto-generated method stub
         throw new UnsupportedOperationException("Unimplemented method 'getActivatedUsers'");
     }
+
+    public void InscriptionBiblio(Utilisateur utilisateur) {
+        if (utilisateur.getEmail().indexOf("@") == -1) {
+            throw new RuntimeException("Votre email est invalide");
+        }
+        if (utilisateur.getEmail().indexOf(".") == -2) {
+            throw new RuntimeException("Votre email est invalide");
+
+        }
+        if (utilisateur.getPassword() == null) {
+            throw new IllegalArgumentException("Le mot de passe ne peut pas être null");
+        } else {
+
+            // cryptage du mot de passe
+            String MpssCrypt = this.bCryptPasswordEncoder.encode(utilisateur.getPassword());
+            utilisateur.setPassword(MpssCrypt);
+        }
+        Optional<Utilisateur> utilisateurOptional = this.utilisateurRepositorie.findByEmail(utilisateur.getEmail());
+        if (utilisateurOptional.isPresent()) {
+            throw new RuntimeException("cet email est deja utiliser");
+        }
+
+        // gestion des rôles
+        Role roleUtilisateur = new Role();
+        roleUtilisateur.setTitre(TypeDeRole.Bibliothequaire);
+        utilisateur.setRole(roleUtilisateur);
+
+        utilisateur = this.utilisateurRepositorie.save(utilisateur);
+        this.validationService.enregistreValidation(utilisateur);
+    }
+
 }

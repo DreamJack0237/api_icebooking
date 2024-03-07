@@ -1,20 +1,30 @@
 package com.example.icebooking.models;
 
-import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
-import lombok.ToString;
-import org.springframework.security.core.GrantedAuthority;
-import org.springframework.security.core.authority.SimpleGrantedAuthority;
-import org.springframework.security.core.userdetails.UserDetails;
-
 import java.util.Collection;
 import java.util.Collections;
 import java.util.List;
 
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
+import org.springframework.security.core.userdetails.UserDetails;
+
+import com.example.icebooking.enums.TypeDeRole;
+
+import jakarta.persistence.CascadeType;
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
+import jakarta.persistence.OneToMany;
+import jakarta.persistence.Table;
+import lombok.Data;
+
 @Entity
-@Table(name="utilisateurs")
+@Table(name = "utilisateurs")
 @Data
 public class Utilisateur implements UserDetails {
 
@@ -45,7 +55,6 @@ public class Utilisateur implements UserDetails {
     @JoinColumn(name = "Role_id")
     private Role role;
 
-
     @OneToMany(mappedBy = "utilisateur", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private List<Avis> avis;
 
@@ -61,26 +70,26 @@ public class Utilisateur implements UserDetails {
     @OneToMany(mappedBy = "utilisateur", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private List<Ouvrage> ouvrages;
 
-    @OneToMany(mappedBy = "utilisateur", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-    private List<DemandeDePret> demandeDePrets;
-
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
-        return Collections.singletonList(new SimpleGrantedAuthority("ROLE_" + this.role.getTitre()));
+        return Collections.singletonList(new SimpleGrantedAuthority("ROLE_" +
+                this.role.getTitre()));
     }
 
     @Override
     public String getUsername() {
         return this.email;
     }
+
     public String getNom() {
         return this.nom;
     }
 
     @Override
-    public String getPassword(){
+    public String getPassword() {
         return this.password;
     }
+
     @Override
     public boolean isAccountNonExpired() {
         return this.actif;
@@ -100,6 +109,5 @@ public class Utilisateur implements UserDetails {
     public boolean isEnabled() {
         return this.actif;
     }
-
 
 }

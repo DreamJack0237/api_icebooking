@@ -3,15 +3,7 @@ package com.example.icebooking.controllers;
 import java.util.List;
 
 import org.springframework.http.HttpStatus;
-import org.springframework.web.bind.annotation.DeleteMapping;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.PutMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseStatus;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import com.example.icebooking.models.Ouvrage;
 import com.example.icebooking.services.BookServiceImpl;
@@ -26,32 +18,32 @@ public class OuvrageController {
     }
 
     @ResponseStatus(HttpStatus.CREATED)
-    @PostMapping("")
+    @PostMapping
     public void creerOuvrage(@RequestBody Ouvrage ouvrage) {
 
         this.ouvrageService.createOuvrage(ouvrage);
     }
 
-    @ResponseStatus(HttpStatus.ACCEPTED)
-    @GetMapping("")
+    @ResponseStatus(HttpStatus.OK)
+    @GetMapping
     public List<Ouvrage> listeOuvrage() {
         return ouvrageService.getOuvrages();
 
     }
 
     @ResponseStatus(HttpStatus.ACCEPTED)
-    @DeleteMapping("/{id}")
+    @DeleteMapping
     public void deleteOuvrage(@PathVariable Integer id) {
         this.ouvrageService.deleteOuvrage(id);
     }
 
     @ResponseStatus(HttpStatus.ACCEPTED)
-    @PutMapping("/{id}")
+    @PutMapping
     public void updateOuvrage(@PathVariable Integer id, @RequestBody Ouvrage ouvrage) {
         this.ouvrageService.updateOuvrage(id, ouvrage);
     }
 
-    @ResponseStatus(HttpStatus.ACCEPTED)
+    @ResponseStatus(HttpStatus.OK)
     @GetMapping("/{id}")
     public Ouvrage getOuvrage(@PathVariable Integer id) {
         return ouvrageService.getOuvrage(id);

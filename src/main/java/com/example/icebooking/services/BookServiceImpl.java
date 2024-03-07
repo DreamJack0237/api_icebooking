@@ -73,25 +73,25 @@ public class BookServiceImpl implements BookService {
     @Override
     public List<Avis> getBookLectors(Integer id) {
         // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'getBookLectors'");
+        throw new UnsupportedOperationException("Unimplemented method'getBookLectors'");
     }
 
     @Override
     public List<Avis> getBookDOwnloader(Integer id) {
         // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'getBookDOwnloader'");
+        throw new UnsupportedOperationException("Unimplemented method'getBookDOwnloader'");
     }
 
     @Override
     public void addOuvrageCategories() {
         // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'addOuvrageCategories'");
+        throw new UnsupportedOperationException("Unimplemented method'addOuvrageCategories'");
     }
 
     @Override
     public void deleteOuvrageCategories() {
         // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'deleteOuvrageCategories'");
+        throw new UnsupportedOperationException("Unimplemented method'deleteOuvrageCategories'");
     }
 
 }

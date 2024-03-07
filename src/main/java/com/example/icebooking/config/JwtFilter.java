@@ -14,8 +14,8 @@ import org.springframework.web.filter.OncePerRequestFilter;
 
 import java.io.IOException;
 
-@EnableWebSecurity
 @Service
+@EnableWebSecurity
 public class JwtFilter extends OncePerRequestFilter {
     private JwtService jwtService;
 
@@ -36,7 +36,7 @@ public class JwtFilter extends OncePerRequestFilter {
 
         final String authorization = request.getHeader("Authorization");
         // Bearer
-        // eyJhbGciOiJIUzI1NiJ9.eyJub20iOiJsZW8iLCJlbWFpbCI6Im5nb3VvbGVvbmVsNEBnbWFpbC5jb20ifQ.u64UboYHCSz5CwLDl2g0fpu1c4oxUOQeJvkUZyi0HsI
+        // eyJhbGciOiJIUzI1NiJ9.eyJub20iOiJsZW8iLCJlbWFpbCI6Im5nb3VvbGVvbmVsNEBnbWFpbC5jb20ifQ.u64UboYHCSz5CwLDl2g0fpu1c4oxUOQeJvkUZyi0HsI'
 
         if (authorization != null && authorization.startsWith("Bearer ")) {
             token = authorization.substring(7);

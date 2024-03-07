@@ -4,7 +4,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.example.icebooking.models.Utilisateur;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 
@@ -18,20 +17,21 @@ import lombok.AllArgsConstructor;
 public class DonatorServiceImpl implements DonatorService {
     private final DonateurRepository donateurRepository;
 
-    
-    public void updateDonateur(Integer id,Donateur donateur){
-        Utilisateur utilisateur =(Utilisateur) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+    public void updateDonateur(Integer id, Donateur donateur) {
+        Utilisateur utilisateur = (Utilisateur) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         donateur.setUtilisateur(utilisateur);
         this.donateurRepository.save(donateur);
     }
+
     @Override
-    public Donateur getDonateur(Integer id){
+    public Donateur getDonateur(Integer id) {
         return donateurRepository.findById(id).orElse(null);
     }
+
     @Override
-    public List<Donateur> getDonateurs(){
-        List<Donateur> donateurs =new ArrayList<>();
-        donateurRepository.findAll().forEach(donateur ->{
+    public List<Donateur> getDonateurs() {
+        List<Donateur> donateurs = new ArrayList<>();
+        donateurRepository.findAll().forEach(donateur -> {
             donateurs.add(donateur);
         });
         return donateurs;

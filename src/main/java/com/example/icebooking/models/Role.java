@@ -24,7 +24,6 @@ import lombok.Data;
 public class Role implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(nullable = false)
     private Integer id;
     @Column(name = "titre")
     @Enumerated(EnumType.STRING)

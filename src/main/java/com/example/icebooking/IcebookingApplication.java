@@ -31,7 +31,6 @@ public class IcebookingApplication {
 		}
 	}
 
-
 	public static void main(String[] args) {
 		SpringApplication.run(IcebookingApplication.class, args);
 	}
