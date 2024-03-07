@@ -1,4 +1,4 @@
-package com.icekiwi.vanisharing.exceptions;
+package com.example.icebooking.exceptions;
 
 public class StorageException extends RuntimeException {
     public StorageException(String message) {

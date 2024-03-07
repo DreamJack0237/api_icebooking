@@ -1,4 +1,4 @@
-package com.icekiwi.vanisharing.services;
+package com.example.icebooking.services;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -15,7 +15,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
-import com.icekiwi.vanisharing.exceptions.StorageFileNotFoundException;
+import com.example.icebooking.exceptions.StorageFileNotFoundException;
 
 @Service
 public class FileStorageService {
