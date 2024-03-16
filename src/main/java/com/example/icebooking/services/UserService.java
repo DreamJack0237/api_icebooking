@@ -2,11 +2,9 @@ package com.example.icebooking.services;
 
 import java.util.List;
 
-import org.springframework.security.core.userdetails.UserDetailsService;
-
 import com.example.icebooking.models.Utilisateur;
 
-public interface UserService extends UserDetailsService {
+public interface UserService {
 
     // get all users lectures
     public void getUserLectures(Integer userId);

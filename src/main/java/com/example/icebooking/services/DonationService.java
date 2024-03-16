@@ -1,21 +1,23 @@
 package com.example.icebooking.services;
 
-import com.example.icebooking.models.Don;
+import com.example.icebooking.models.Donation;
 
 import java.util.List;
 
 public interface DonationService {
 
-    //create a donnation
-    public void createDon(Don don);
-    //get information  about a specific donation
-    public Don getDon(Integer id);
-    //get all donations 
-    public List<Don> getDons();
+    // create a donnation
+    public void createDon(Donation don);
 
-    //update a donation
-    public  void updateDon(Integer id,Don don);
+    // get information about a specific donation
+    public Donation getDon(Integer id);
 
-    //get  donator donations
-    public  List<Don>  getDonatorDonations(Integer id);
+    // get all donations
+    public List<Donation> getDons();
+
+    // update a donation
+    public void updateDon(Integer id, Donation don);
+
+    // get donator donations
+    public List<Donation> getDonatorDonations(Integer id);
 }

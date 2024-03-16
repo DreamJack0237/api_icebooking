@@ -5,8 +5,8 @@ import java.util.List;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
-import com.example.icebooking.models.Categorie;
-import com.example.icebooking.services.CategorieServiceImpl;
+import com.example.icebooking.models.Category;
+import com.example.icebooking.services.CategoryServiceImpl;
 
 import lombok.AllArgsConstructor;
 
@@ -14,17 +14,17 @@ import lombok.AllArgsConstructor;
 @RestController
 @AllArgsConstructor
 public class CategorieController {
-    private final CategorieServiceImpl categorieService;
+    private final CategoryServiceImpl categorieService;
 
     @ResponseStatus(HttpStatus.CREATED)
     @PostMapping("/")
-    public void creerCategorie(@RequestBody Categorie categorie) {
+    public void creerCategorie(@RequestBody Category categorie) {
         this.categorieService.createCategorie(categorie);
     }
 
     @ResponseStatus(HttpStatus.ACCEPTED)
     @GetMapping("")
-    public List<Categorie> listeCategorie() {
+    public List<Category> listeCategorie() {
         return categorieService.getCategories();
 
     }
@@ -37,19 +37,19 @@ public class CategorieController {
 
     @ResponseStatus(HttpStatus.ACCEPTED)
     @PutMapping("/{id}")
-    public void updateCategorie(@PathVariable Integer id, @RequestBody Categorie categorie) {
+    public void updateCategorie(@PathVariable Integer id, @RequestBody Category categorie) {
         this.categorieService.updateCategorie(id, categorie);
     }
 
     @ResponseStatus(HttpStatus.ACCEPTED)
     @GetMapping("/{id}")
-    public Categorie getCategorie(@PathVariable Integer id) {
+    public Category getCategorie(@PathVariable Integer id) {
         return categorieService.getCategorie(id);
     }
 
     @ResponseStatus(HttpStatus.ACCEPTED)
     @GetMapping("/{id}/ouvrages")
-    public Categorie getCategorieOuvrages(@PathVariable Integer id) {
+    public Category getCategorieOuvrages(@PathVariable Integer id) {
         return categorieService.getCategorie(id);
     }
 

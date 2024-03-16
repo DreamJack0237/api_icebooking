@@ -3,25 +3,28 @@ package com.example.icebooking.controllers;
 import java.util.List;
 
 import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
 import com.example.icebooking.models.Ouvrage;
 import com.example.icebooking.services.BookServiceImpl;
 
 @RequestMapping("/ouvrages")
 @RestController
-public class OuvrageController {
+public class BookController {
     private final BookServiceImpl ouvrageService;
 
-    public OuvrageController(BookServiceImpl ouvrageService) {
+    public BookController(BookServiceImpl ouvrageService) {
         this.ouvrageService = ouvrageService;
     }
 
     @ResponseStatus(HttpStatus.CREATED)
     @PostMapping
-    public void creerOuvrage(@RequestBody Ouvrage ouvrage) {
+    public void creerOuvrage(Ouvrage ouvrage, @RequestParam("file") MultipartFile file,
+            @RequestParam("image") MultipartFile image) {
 
-        this.ouvrageService.createOuvrage(ouvrage);
+        this.ouvrageService.createOuvrage(ouvrage, file, image);
     }
 
     @ResponseStatus(HttpStatus.OK)
@@ -47,6 +50,12 @@ public class OuvrageController {
     @GetMapping("/{id}")
     public Ouvrage getOuvrage(@PathVariable Integer id) {
         return ouvrageService.getOuvrage(id);
+    }
+
+    @ResponseStatus(HttpStatus.OK)
+    @GetMapping("/{id}/download")
+    public ResponseEntity<?> DownloadOuvrage(@PathVariable Integer id) {
+        return ouvrageService.downloadBook(id);
     }
 
     @ResponseStatus(HttpStatus.ACCEPTED)

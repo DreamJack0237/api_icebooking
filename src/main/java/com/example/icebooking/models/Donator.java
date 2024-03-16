@@ -1,10 +1,7 @@
 package com.example.icebooking.models;
 
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
 import lombok.Data;
-import lombok.NoArgsConstructor;
-import lombok.ToString;
 
 import java.io.Serializable;
 import java.util.List;
@@ -13,7 +10,7 @@ import java.util.List;
 @Table(name = "donateur")
 @Data
 
-public class Donateur implements Serializable {
+public class Donator implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(nullable = false)
@@ -24,7 +21,7 @@ public class Donateur implements Serializable {
     private double telephone;
 
     @OneToMany(mappedBy = "donateur", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-    private List<Don> dons;
+    private List<Donation> dons;
 
     @ManyToOne
     @JoinColumn(name = "utilisateur_id")

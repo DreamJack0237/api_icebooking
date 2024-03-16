@@ -1,10 +1,9 @@
 package com.example.icebooking.repositories;
 
+import org.springframework.data.jpa.repository.JpaRepository;
+
 import com.example.icebooking.models.Lecture;
-import org.springframework.data.repository.CrudRepository;
 
-public interface LectureRepository extends CrudRepository <Lecture,Integer>{
-
-
+public interface LectureRepository extends JpaRepository<Lecture, Integer> {
 
 }

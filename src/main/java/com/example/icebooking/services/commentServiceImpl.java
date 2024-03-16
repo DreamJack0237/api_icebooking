@@ -1,56 +1,42 @@
-// package com.example.icebooking.services;
+package com.example.icebooking.services;
 
-// import java.util.ArrayList;
-// import java.util.List;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.stereotype.Service;
 
-// import com.example.icebooking.models.Utilisateur;
-// import org.springframework.beans.factory.annotation.Autowired;
-// import org.springframework.security.core.context.SecurityContextHolder;
-// import org.springframework.stereotype.Service;
+import com.example.icebooking.models.Comment;
+import com.example.icebooking.models.Utilisateur;
+import com.example.icebooking.repositories.CommentRepository;
 
-// import com.example.icebooking.models.Commentaire;
-// import com.example.icebooking.repositories.CommentaireRepository;
+import lombok.AllArgsConstructor;
 
-// import lombok.AllArgsConstructor;
+@AllArgsConstructor
+@Service
+public class CommentServiceImpl implements CommentService {
+    @Autowired
+    private final CommentRepository commentRepository;
 
-// @AllArgsConstructor
-// @Service
-// public class commentServiceImpl implements CommentService {
-// @Autowired
-// private final CommentaireRepository commentaireRepository;
+    @Override
+    public void createCommentaire(Comment commentaire) {
+        Utilisateur utilisateur = (Utilisateur) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        commentaire.setUtilisateur(utilisateur);
+        this.commentRepository.save(commentaire);
+    }
 
-// @Override
-// public void createCommentaire(Commentaire commentaire){
-// Utilisateur utilisateur =(Utilisateur)
-// SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-// commentaire.setUtilisateur(utilisateur);
-// this.commentaireRepository.save(commentaire);
-// }
-// @Override
-// public void deleteCommentaire(Integer id){
-// this.commentaireRepository.deleteById(id);
-// }
-// @Override
-// public void updateCommentaire(Integer id,Commentaire commentaire){
-// Utilisateur utilisateur =(Utilisateur)
-// SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-// commentaire.setUtilisateur(utilisateur);
-// this.commentaireRepository.save(commentaire);
-// }
-// @Override
-// public Commentaire getCommentaire(Integer id){
-// return commentaireRepository.findById(id).orElse(null);
-// }
+    @Override
+    public void deleteCommentaire(Integer id) {
+        this.commentRepository.deleteById(id);
+    }
 
-// @Override
-// public List<Commentaire> getCommentaires(){
-// List<Commentaire> commentaires =new ArrayList<>();
-// commentaireRepository.findAll().forEach(commentaire ->{
-// commentaires.add(commentaire);
+    @Override
+    public void updateCommentaire(Integer id, Comment commentaire) {
+        Utilisateur utilisateur = (Utilisateur) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        commentaire.setUtilisateur(utilisateur);
+        this.commentRepository.save(commentaire);
+    }
 
-// });
-
-// return commentaires;
-// }
-
-// }
+    @Override
+    public Comment getCommentaire(Integer id) {
+        return commentRepository.findById(id).orElse(null);
+    }
+}

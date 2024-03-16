@@ -1,6 +1,9 @@
 package com.example.icebooking.config;
 
 import com.example.icebooking.services.UserServiceimpl;
+
+import io.jsonwebtoken.Claims;
+import io.jsonwebtoken.Jwts;
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
@@ -17,14 +20,6 @@ import java.io.IOException;
 @Service
 @EnableWebSecurity
 public class JwtFilter extends OncePerRequestFilter {
-    private JwtService jwtService;
-
-    private UserServiceimpl utilisateurService;
-
-    public JwtFilter(JwtService jwtService, UserServiceimpl utilisateurService) {
-        this.jwtService = jwtService;
-        this.utilisateurService = utilisateurService;
-    }
 
     @Override
     protected void doFilterInternal(HttpServletRequest request,
@@ -40,15 +35,10 @@ public class JwtFilter extends OncePerRequestFilter {
 
         if (authorization != null && authorization.startsWith("Bearer ")) {
             token = authorization.substring(7);
-            isTokenExpired = jwtService.isTokenExpired(token);
-            username = this.jwtService.ExtractUsername(token);
         }
         if (!isTokenExpired && username != null &&
                 SecurityContextHolder.getContext().getAuthentication() == null) {
-            UserDetails userDetails = this.utilisateurService.loadUserByUsername(username);
-            UsernamePasswordAuthenticationToken authentication = new UsernamePasswordAuthenticationToken(userDetails,
-                    null, userDetails.getAuthorities());
-            SecurityContextHolder.getContext().setAuthentication(authentication);
+
         }
         filterChain.doFilter(request, response);
     }

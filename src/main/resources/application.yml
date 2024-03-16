@@ -1,3 +1,7 @@
+server:
+  servlet:
+    context-path: "/api"
+
 spring:
   security:
     user:
@@ -14,16 +18,14 @@ spring:
       ddl-auto: update
     show-sql: false
 
-  # Configuration for Mail
-  spring:
-    mail:
-      host: smtp.gmail.com
-      port: 587
-      username: ngouoleonel3@gmail.com
-      password: wlax zthp fymp nfoi
-      properties:
-        mail:
-          smtp:
-            auth: true
-            starttls:
-              enable: true
+  mail:
+    host: smtp.gmail.com
+    port: 587
+    username: ngouoleonel3@gmail.com
+    password: wlax zthp fymp nfoi
+    properties:
+      mail:
+        smtp:
+          auth: true
+          starttls:
+            enable: true

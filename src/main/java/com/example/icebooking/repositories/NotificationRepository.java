@@ -1,8 +1,9 @@
 package com.example.icebooking.repositories;
 
-import com.example.icebooking.models.Notification;
-import org.springframework.data.repository.CrudRepository;
+import org.springframework.data.jpa.repository.JpaRepository;
 
-public interface NotificationRepository extends CrudRepository<Notification, Integer> {
+import com.example.icebooking.models.Notification;
+
+public interface NotificationRepository extends JpaRepository<Notification, Integer> {
 
 }

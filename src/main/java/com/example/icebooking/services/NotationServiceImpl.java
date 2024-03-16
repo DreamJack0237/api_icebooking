@@ -8,8 +8,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 
-import com.example.icebooking.models.Avis;
-import com.example.icebooking.repositories.AvisRepository;
+import com.example.icebooking.models.Notation;
+import com.example.icebooking.repositories.NotationRepository;
 
 import lombok.AllArgsConstructor;
 
@@ -17,23 +17,23 @@ import lombok.AllArgsConstructor;
 @Service
 public class NotationServiceImpl implements NotationService {
     @Autowired
-    private final AvisRepository avisRepository;
+    private final NotationRepository avisRepository;
 
     @Override
-    public void createOrUpdateAvis(Avis avis) {
+    public void createOrUpdateAvis(Notation avis) {
         Utilisateur utilisateur = (Utilisateur) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-        avis.setUtilisateur(utilisateur);
+        avis.setOwner(utilisateur);
         this.avisRepository.save(avis);
     }
 
     @Override
-    public Avis getAvis(Integer id) {
+    public Notation getAvis(Integer id) {
         return avisRepository.findById(id).orElse(null);
     }
 
     @Override
-    public List<Avis> getAviss() {
-        List<Avis> aviss = new ArrayList<>();
+    public List<Notation> getAviss() {
+        List<Notation> aviss = new ArrayList<>();
         avisRepository.findAll().forEach(avis -> {
             aviss.add(avis);
 

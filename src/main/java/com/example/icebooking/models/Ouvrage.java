@@ -16,9 +16,7 @@ import jakarta.persistence.ManyToMany;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
-import lombok.AllArgsConstructor;
 import lombok.Data;
-import lombok.NoArgsConstructor;
 
 @Entity
 @Table(name = "ouvrage")
@@ -37,30 +35,33 @@ public class Ouvrage implements Serializable {
     @Column(name = "quantite")
     private Integer quantite;
     @Column(name = "version_num", nullable = true)
-
     private String version_num;
+
+    private String image;
+
+    private String file;
 
     @ManyToOne
     @JoinColumn(name = "utilisateur_id", nullable = false)
-    private Utilisateur utilisateur;
+    private Utilisateur creator;
     @ManyToOne
     @JoinColumn(name = "categorie_id", nullable = false)
-    private Categorie categorie;
+    private Category categorie;
 
     @OneToMany(mappedBy = "ouvrage", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-    private List<Avis> avis;
+    private List<Notation> avis;
 
     @OneToMany(mappedBy = "ouvrage", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private List<Lecture> lectures;
 
     @OneToMany(mappedBy = "ouvrage", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-    private List<Telechargement> telechargements;
+    private List<Download> telechargements;
 
     @OneToMany(mappedBy = "ouvrage", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-    private List<Commentaire> commentaires;
+    private List<Comment> commentaires;
 
     @ManyToMany
     @JoinTable(name = "ouvrage_categorie", joinColumns = @JoinColumn(name = "ouvrage_id"), inverseJoinColumns = @JoinColumn(name = "categorie_id"))
-    private List<Categorie> categories;
+    private List<Category> categories;
 
 }

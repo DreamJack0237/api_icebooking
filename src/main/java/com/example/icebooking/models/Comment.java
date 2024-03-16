@@ -9,7 +9,7 @@ import java.io.Serializable;
 @Entity
 @Table(name = "commentaire")
 @Data
-public class Commentaire implements Serializable {
+public class Comment implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(nullable = false)

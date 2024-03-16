@@ -1,30 +1,37 @@
 package com.example.icebooking.services;
 
-import com.example.icebooking.models.Avis;
-import com.example.icebooking.models.Ouvrage;
-import com.example.icebooking.models.Utilisateur;
-import com.example.icebooking.repositories.OuvrageRepository;
-import lombok.AllArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
-import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.stereotype.Service;
-import org.springframework.web.server.ResponseStatusException;
-
 import java.util.ArrayList;
 import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.server.ResponseStatusException;
+
+import com.example.icebooking.models.Notation;
+import com.example.icebooking.models.Ouvrage;
+import com.example.icebooking.models.Utilisateur;
+import com.example.icebooking.repositories.BookRepository;
+
+import lombok.AllArgsConstructor;
 
 @AllArgsConstructor
 @Service
 public class BookServiceImpl implements BookService {
 
     @Autowired
-    private final OuvrageRepository ouvrageRepository;
+    private final BookRepository ouvrageRepository;
+
+    private final FileStorageService fileStorageService;
 
     @Override
-    public void createOuvrage(Ouvrage ouvrage) {
-        Utilisateur utilisateur = (Utilisateur) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-        ouvrage.setUtilisateur(utilisateur);
+    public void createOuvrage(Ouvrage ouvrage, MultipartFile file, MultipartFile image) {
+        ouvrage.setImage(fileStorageService.saveFile("images", image));
+        ouvrage.setFile(fileStorageService.saveFile("files", file));
+
         this.ouvrageRepository.save(ouvrage);
     }
 
@@ -41,15 +48,13 @@ public class BookServiceImpl implements BookService {
         existingProduct.setNom(ouvrage.getNom());
         existingProduct.setDescription(ouvrage.getDescription());
         existingProduct.setQuantite(ouvrage.getQuantite());
-        existingProduct.setUtilisateur(ouvrage.getUtilisateur());
 
-        Utilisateur utilisateur = (Utilisateur) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-        ouvrage.setUtilisateur(utilisateur);
         this.ouvrageRepository.save(existingProduct);
     }
 
     @Override
     public Ouvrage getOuvrage(Integer id) {
+
         return ouvrageRepository.findById(id).orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND));
     }
 
@@ -65,33 +70,42 @@ public class BookServiceImpl implements BookService {
     }
 
     @Override
-    public List<Avis> getBookNotations(Integer id) {
+    public List<Notation> getBookNotations(Integer id) {
         // TODO Auto-generated method stub
         throw new UnsupportedOperationException("Unimplemented method 'getBookNotations'");
     }
 
     @Override
-    public List<Avis> getBookLectors(Integer id) {
+    public List<Notation> getBookLectors(Integer id) {
         // TODO Auto-generated method stub
         throw new UnsupportedOperationException("Unimplemented method'getBookLectors'");
     }
 
     @Override
-    public List<Avis> getBookDOwnloader(Integer id) {
+    public List<Notation> getBookDownloader(Integer id) {
         // TODO Auto-generated method stub
         throw new UnsupportedOperationException("Unimplemented method'getBookDOwnloader'");
     }
 
+    // add category to a book
     @Override
-    public void addOuvrageCategories() {
+    public void addBookCategory(Integer id, Integer categoryId) {
         // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method'addOuvrageCategories'");
+        throw new UnsupportedOperationException("Unimplemented method'addBookCategory'");
+    }
+
+    // remove a categroy from book
+    @Override
+    public void deleteBookCategory(Integer id, Integer categoryId) {
+        // TODO Auto-generated method stub
+
+        throw new UnsupportedOperationException("Unimplemented method'deleteBookCategory'");
     }
 
     @Override
-    public void deleteOuvrageCategories() {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method'deleteOuvrageCategories'");
+    public ResponseEntity<?> downloadBook(Integer id) {
+        Ouvrage o = ouvrageRepository.getReferenceById(id);
+        return fileStorageService.load(o.getFile());
     }
 
 }

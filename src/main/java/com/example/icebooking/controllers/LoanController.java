@@ -10,10 +10,10 @@ import com.example.icebooking.services.PretServiceImpl;
 
 @RestController
 @RequestMapping("/prets")
-public class PretController {
+public class LoanController {
     private final PretServiceImpl pretService;
 
-    public PretController(PretServiceImpl pretService) {
+    public LoanController(PretServiceImpl pretService) {
         this.pretService = pretService;
     }
 

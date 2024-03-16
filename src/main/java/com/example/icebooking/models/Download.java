@@ -17,7 +17,7 @@ import lombok.Data;
 @Table(name = "telechargement")
 @Data
 
-public class Telechargement implements Serializable {
+public class Download implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(nullable = false)
