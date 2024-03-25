@@ -4,9 +4,9 @@ import java.util.Collection;
 import java.util.Collections;
 import java.util.List;
 
-import org.springframework.security.core.GrantedAuthority;
-import org.springframework.security.core.authority.SimpleGrantedAuthority;
-import org.springframework.security.core.userdetails.UserDetails;
+// import org.springframework.security.core.GrantedAuthority;
+// import org.springframework.security.core.authority.SimpleGrantedAuthority;
+// import org.springframework.security.core.userdetails.UserDetails;
 
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
@@ -24,7 +24,7 @@ import lombok.Data;
 @Entity
 @Table(name = "utilisateurs")
 @Data
-public class Utilisateur implements UserDetails {
+public class Utilisateur  {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -69,45 +69,5 @@ public class Utilisateur implements UserDetails {
     private List<Ouvrage> ouvrages;
     @OneToMany(mappedBy = "utilisateur", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private List<Pret> pret;
-
-    @Override
-    public Collection<? extends GrantedAuthority> getAuthorities() {
-        return Collections.singletonList(new SimpleGrantedAuthority("ROLE_" +
-                this.role.getTitre()));
-    }
-
-    @Override
-    public String getUsername() {
-        return this.email;
-    }
-
-    public String getNom() {
-        return this.nom;
-    }
-
-    @Override
-    public String getPassword() {
-        return this.password;
-    }
-
-    @Override
-    public boolean isAccountNonExpired() {
-        return this.actif;
-    }
-
-    @Override
-    public boolean isAccountNonLocked() {
-        return this.actif;
-    }
-
-    @Override
-    public boolean isCredentialsNonExpired() {
-        return this.actif;
-    }
-
-    @Override
-    public boolean isEnabled() {
-        return this.actif;
-    }
 
 }

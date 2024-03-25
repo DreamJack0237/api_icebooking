@@ -1,7 +1,9 @@
 package com.example.icebooking.services;
 
+import java.util.Date;
 import java.util.List;
 
+import com.example.icebooking.Dto.LoanRequestDto;
 import com.example.icebooking.models.Pret;
 
 public interface PretService {
@@ -10,7 +12,9 @@ public interface PretService {
 
     Pret getPret(Integer id);
 
-    String backPret(Integer id);
+    void backPret(Integer id);
 
-    Pret createPret(Pret pret);
+    void updateLimitDate(Integer id, Date date);
+
+    Pret createPret(LoanRequestDto loanDto);
 }

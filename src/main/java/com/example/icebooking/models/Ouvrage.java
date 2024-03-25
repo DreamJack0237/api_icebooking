@@ -3,6 +3,7 @@ package com.example.icebooking.models;
 import java.io.Serializable;
 import java.util.List;
 
+import io.micrometer.common.lang.Nullable;
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -23,9 +24,9 @@ import lombok.Data;
 @Data
 public class Ouvrage implements Serializable {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.UUID)
     @Column(nullable = false)
-    private Integer id;
+    private String id;
     @Column(name = "nom")
     private String nom;
     @Column(name = "autheur")
@@ -33,20 +34,15 @@ public class Ouvrage implements Serializable {
     @Column(name = "description")
     private String description;
     @Column(name = "quantite")
-    private Integer quantite;
-    @Column(name = "version_num", nullable = true)
-    private String version_num;
+    private Integer quantite = 1;
 
-    private String image;
+    private String imagePath;
 
-    private String file;
+    private String filePath;
 
     @ManyToOne
-    @JoinColumn(name = "utilisateur_id", nullable = false)
+    @JoinColumn(name = "utilisateur_id", nullable = true)
     private Utilisateur creator;
-    @ManyToOne
-    @JoinColumn(name = "categorie_id", nullable = false)
-    private Category categorie;
 
     @OneToMany(mappedBy = "ouvrage", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private List<Notation> avis;

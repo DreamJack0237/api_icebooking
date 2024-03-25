@@ -13,33 +13,33 @@ public interface BookService {
     // create book
     public void createOuvrage(Ouvrage ouvrage, MultipartFile file, MultipartFile image);
 
-    public ResponseEntity<?> downloadBook(Integer id);
+    public ResponseEntity<?> downloadBook(String id);
 
     // delete book
-    public void deleteOuvrage(Integer id);
+    public void deleteOuvrage(String id);
 
     // get book notations
-    public List<Notation> getBookNotations(Integer id);
+    public List<Notation> getBookNotations(String id);
 
     // get book lectors
-    public List<Notation> getBookLectors(Integer id);
+    public List<Notation> getBookLectors(String id);
 
     // get book downloader
-    public List<Notation> getBookDownloader(Integer id);
+    public List<Notation> getBookDownloader(String id);
 
     // add a category to book
-    public void addBookCategory(Integer bookId, Integer categoryId);
+    public void addBookCategory(String bookId, Integer categoryId);
 
     // delete specified book categories
-    public void deleteBookCategory(Integer bookId, Integer categoryId);
+    public void deleteBookCategory(String bookId, Integer categoryId);
 
     // get a book
-    public Ouvrage getOuvrage(Integer id);
+    public Ouvrage getOuvrage(String id);
 
     // get all book
     public List<Ouvrage> getOuvrages();
 
     // update all book
-    public void updateOuvrage(Integer id, Ouvrage ouvrage);
+    public void updateOuvrage(String id, Ouvrage ouvrage, MultipartFile file, MultipartFile image);
 
 }

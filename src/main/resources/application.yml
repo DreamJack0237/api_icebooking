@@ -1,12 +1,10 @@
 server:
   servlet:
-    context-path: "/api"
+    context-path: /api/library
 
 spring:
-  security:
-    user:
-      name: icekiwi
-      password: icekiwicopy2023
+  application:
+    name: icebooking
 
   datasource:
     url: jdbc:mysql://localhost:3306/bookbd?useSSL=false&serverTimezone=UTC&allowPublicKeyRetrieval=true&createDatabaseIfNotExist=true
@@ -29,3 +27,10 @@ spring:
           auth: true
           starttls:
             enable: true
+
+eureka:
+  client:
+    serviceUrl:
+      defaultZone: ${EUREKA_URI:http://localhost:5000/eureka}
+  instance:
+    preferIpAddress: true

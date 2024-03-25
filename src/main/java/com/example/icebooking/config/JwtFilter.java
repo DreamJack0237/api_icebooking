@@ -8,14 +8,14 @@ import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
-import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Service;
 import org.springframework.web.filter.OncePerRequestFilter;
 
 import java.io.IOException;
+
+import org.springframework.security.core.context.SecurityContextHolder;
 
 @Service
 @EnableWebSecurity
@@ -25,19 +25,18 @@ public class JwtFilter extends OncePerRequestFilter {
     protected void doFilterInternal(HttpServletRequest request,
             HttpServletResponse response, FilterChain filterChain)
             throws ServletException, IOException {
+
+        System.out.println(request.getHeaderNames().toString());
         String token = null;
         String username = null;
         boolean isTokenExpired = true;
 
         final String authorization = request.getHeader("Authorization");
-        // Bearer
-        // eyJhbGciOiJIUzI1NiJ9.eyJub20iOiJsZW8iLCJlbWFpbCI6Im5nb3VvbGVvbmVsNEBnbWFpbC5jb20ifQ.u64UboYHCSz5CwLDl2g0fpu1c4oxUOQeJvkUZyi0HsI'
-
         if (authorization != null && authorization.startsWith("Bearer ")) {
             token = authorization.substring(7);
+            System.out.println(authorization);
         }
-        if (!isTokenExpired && username != null &&
-                SecurityContextHolder.getContext().getAuthentication() == null) {
+        if (!isTokenExpired && username != null && SecurityContextHolder.getContext().getAuthentication() == null) {
 
         }
         filterChain.doFilter(request, response);

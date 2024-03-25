@@ -3,11 +3,9 @@ package com.example.icebooking.services;
 import java.util.List;
 import java.util.Optional;
 
-import org.springframework.security.core.userdetails.UserDetails;
+// import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Service;
 
-import com.example.icebooking.enums.TypeDeRole;
-import com.example.icebooking.models.Role;
 import com.example.icebooking.models.Utilisateur;
 
 import lombok.AllArgsConstructor;

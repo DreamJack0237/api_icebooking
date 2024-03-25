@@ -5,7 +5,7 @@ import java.util.List;
 
 import com.example.icebooking.models.Utilisateur;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.core.context.SecurityContextHolder;
+// import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 
 import com.example.icebooking.models.Notation;
@@ -21,8 +21,9 @@ public class NotationServiceImpl implements NotationService {
 
     @Override
     public void createOrUpdateAvis(Notation avis) {
-        Utilisateur utilisateur = (Utilisateur) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-        avis.setOwner(utilisateur);
+        // Utilisateur utilisateur = (Utilisateur)
+        // SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        // avis.setOwner(utilisateur);
         this.avisRepository.save(avis);
     }
 

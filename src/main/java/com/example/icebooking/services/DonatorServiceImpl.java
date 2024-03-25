@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.example.icebooking.models.Utilisateur;
-import org.springframework.security.core.context.SecurityContextHolder;
+// import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 
 import com.example.icebooking.models.Donator;
@@ -18,8 +18,9 @@ public class DonatorServiceImpl implements DonatorService {
     private final DonatorRepository donateurRepository;
 
     public void updateDonateur(Integer id, Donator donateur) {
-        Utilisateur utilisateur = (Utilisateur) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-        donateur.setUtilisateur(utilisateur);
+        // Utilisateur utilisateur = (Utilisateur)
+        // SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        // donateur.setUtilisateur(utilisateur);
         this.donateurRepository.save(donateur);
     }
 

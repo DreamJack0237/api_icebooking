@@ -4,6 +4,11 @@ import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
 
+import org.hibernate.annotations.CreationTimestamp;
+import org.hibernate.annotations.UpdateTimestamp;
+
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -24,21 +29,27 @@ public class Pret implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(nullable = false)
     private Integer id;
+    @CreationTimestamp
     @Column(name = "date_pret")
-    private Date date_pret;
-    @Column(name = "date_limite_retour")
-    private Date date_limite_retour;
+    @JsonProperty("loaned_at")
+    private Date loanDate;
 
+    @Column(name = "limit_back_date")
+    private Date limitBackDate;
 
-    @Column(name = "date_retour", nullable = true)
-    private Date date_retour;
+    @Column(name = "back_date", nullable = true)
+    private Date BackDate;
 
     @ManyToMany
-    @JoinTable(name = "pret_ouvrage", joinColumns = @JoinColumn(name = "pret_id"), inverseJoinColumns = @JoinColumn(name = "ouvrage_id"))
+    @JoinTable(name = "pret_ouvrage", joinColumns = @JoinColumn(name = "pret_id"), inverseJoinColumns = @JoinColumn(name = "book_id"))
     private List<Ouvrage> ouvrages;
 
     @ManyToOne
-    @JoinColumn(name = "utilisateur_id", nullable = false)
+    @JoinColumn(name = "utilisateur_id", nullable = true)
     private Utilisateur utilisateur;
+
+    public void addBook(Ouvrage book) {
+        ouvrages.add(book);
+    }
 
 }

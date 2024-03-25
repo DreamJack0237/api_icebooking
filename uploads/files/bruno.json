@@ -1,0 +1,9 @@
+{
+  "version": "1",
+  "name": "icebooking",
+  "type": "collection",
+  "ignore": [
+    "node_modules",
+    ".git"
+  ]
+}

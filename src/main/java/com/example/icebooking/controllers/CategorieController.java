@@ -17,13 +17,13 @@ public class CategorieController {
     private final CategoryServiceImpl categorieService;
 
     @ResponseStatus(HttpStatus.CREATED)
-    @PostMapping("/")
+    @PostMapping
     public void creerCategorie(@RequestBody Category categorie) {
         this.categorieService.createCategorie(categorie);
     }
 
     @ResponseStatus(HttpStatus.ACCEPTED)
-    @GetMapping("")
+    @GetMapping
     public List<Category> listeCategorie() {
         return categorieService.getCategories();
 

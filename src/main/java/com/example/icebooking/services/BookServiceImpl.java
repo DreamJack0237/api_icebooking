@@ -6,7 +6,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.core.context.SecurityContextHolder;
+// import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.server.ResponseStatusException;
@@ -24,24 +24,24 @@ public class BookServiceImpl implements BookService {
 
     @Autowired
     private final BookRepository ouvrageRepository;
-
+    @Autowired
     private final FileStorageService fileStorageService;
 
     @Override
     public void createOuvrage(Ouvrage ouvrage, MultipartFile file, MultipartFile image) {
-        ouvrage.setImage(fileStorageService.saveFile("images", image));
-        ouvrage.setFile(fileStorageService.saveFile("files", file));
+        ouvrage.setImagePath(fileStorageService.saveFile("images", image));
+        ouvrage.setFilePath(fileStorageService.saveFile("files", file));
 
         this.ouvrageRepository.save(ouvrage);
     }
 
     @Override
-    public void deleteOuvrage(Integer id) {
+    public void deleteOuvrage(String id) {
         this.ouvrageRepository.deleteById(id);
     }
 
     @Override
-    public void updateOuvrage(Integer id, Ouvrage ouvrage) {
+    public void updateOuvrage(String id, Ouvrage ouvrage, MultipartFile file, MultipartFile image) {
         Ouvrage existingProduct = ouvrageRepository.findById(id)
                 .orElseThrow(() -> new RuntimeException("Product not found with id: " + id));
         existingProduct.setAutheur(ouvrage.getAutheur());
@@ -53,7 +53,7 @@ public class BookServiceImpl implements BookService {
     }
 
     @Override
-    public Ouvrage getOuvrage(Integer id) {
+    public Ouvrage getOuvrage(String id) {
 
         return ouvrageRepository.findById(id).orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND));
     }
@@ -70,42 +70,42 @@ public class BookServiceImpl implements BookService {
     }
 
     @Override
-    public List<Notation> getBookNotations(Integer id) {
+    public List<Notation> getBookNotations(String id) {
         // TODO Auto-generated method stub
         throw new UnsupportedOperationException("Unimplemented method 'getBookNotations'");
     }
 
     @Override
-    public List<Notation> getBookLectors(Integer id) {
+    public List<Notation> getBookLectors(String id) {
         // TODO Auto-generated method stub
         throw new UnsupportedOperationException("Unimplemented method'getBookLectors'");
     }
 
     @Override
-    public List<Notation> getBookDownloader(Integer id) {
+    public List<Notation> getBookDownloader(String id) {
         // TODO Auto-generated method stub
         throw new UnsupportedOperationException("Unimplemented method'getBookDOwnloader'");
     }
 
     // add category to a book
     @Override
-    public void addBookCategory(Integer id, Integer categoryId) {
+    public void addBookCategory(String id, Integer categoryId) {
         // TODO Auto-generated method stub
         throw new UnsupportedOperationException("Unimplemented method'addBookCategory'");
     }
 
     // remove a categroy from book
     @Override
-    public void deleteBookCategory(Integer id, Integer categoryId) {
+    public void deleteBookCategory(String id, Integer categoryId) {
         // TODO Auto-generated method stub
 
         throw new UnsupportedOperationException("Unimplemented method'deleteBookCategory'");
     }
 
     @Override
-    public ResponseEntity<?> downloadBook(Integer id) {
+    public ResponseEntity<?> downloadBook(String id) {
         Ouvrage o = ouvrageRepository.getReferenceById(id);
-        return fileStorageService.load(o.getFile());
+        return fileStorageService.load(o.getFilePath());
     }
 
 }

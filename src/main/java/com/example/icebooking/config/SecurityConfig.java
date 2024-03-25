@@ -31,6 +31,10 @@ public class SecurityConfig {
                                                 authorize -> authorize
                                                                 .requestMatchers("/ouvrages/**")
                                                                 .permitAll()
+                                                                .requestMatchers("/prets/**")
+                                                                .permitAll()
+                                                                .requestMatchers("/files/**")
+                                                                .permitAll()
                                                                 .requestMatchers(HttpMethod.GET, "/categories/**")
                                                                 .permitAll()
 
