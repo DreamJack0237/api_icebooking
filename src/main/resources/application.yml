@@ -1,4 +1,5 @@
 server:
+  port: 8080
   servlet:
     context-path: /api/library
 
@@ -8,10 +9,14 @@ spring:
 
   datasource:
     url: jdbc:mysql://localhost:3306/bookbd?useSSL=false&serverTimezone=UTC&allowPublicKeyRetrieval=true&createDatabaseIfNotExist=true
-    password: amizoneng1
+    password: leo123leo123
     username: root
     driver-class-name: com.mysql.cj.jdbc.Driver
+
   jpa:
+    properties:
+      hibernate:
+        dialect : org.hibernate.dialect.MySQLDialect
     hibernate:
       ddl-auto: update
     show-sql: false
